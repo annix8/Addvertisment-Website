@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisments</title>
+    <script src="scripts/jquery-3.1.0.min.js"></script>
+    <script src="scripts/ads-listing.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="styles/site.css"/>
+
+</head>
+<body>
+<div class="content">
+<header id="menu">
+    <ul id="navMenu">
+        <li><a href="#" id="linkHome">Home</a></li>
+        <li><a href="#" id="linkAbout">About</a></li>
+        <li> <a href="#" id="linkLogin">Login</a></li>
+        <li> <a href="#" id="linkRegister">Register</a></li>
+        <li> <a href="#" id="linkMyAdds">My advertisments</a></li>
+        <li> <a href="#" id="linkListAdds">List all advertisments</a></li>
+        <li> <a href="#" id="linkCreateAdd">Create new advertisment</a></li>
+        <li> <a href="#" id="linkLogout">Logout</a>
+    </ul>
+
+
+    <main>
+        <section id="loadingBox">Loading...</section>
+        <section id="infoBox" onclick='$(this).fadeOut()'>Info</section>
+        <section id="errorBox" onclick='$(this).fadeOut()'>Error</section>
+        <section id="viewHome">
+
+          <h1 id="greetingsHeading">Greetings</h1>
+
+            Welcome to our Adds Listing Site
+            <p>Here you can post everything that you want to sell/buy. Just login into your account and
+            click the Create New Advertisment link. If you are not in our system, you can still browse the collection
+            of advertisments our other users have. Enjoy your stay!</p>
+        </section>
+
+        <section id="viewAbout">
+            <h1>Welcome to the About page</h1>
+            <p>We are four students currently learning in SoftUni. The idea of this
+            website is to create an environment for users to easily publish their advertisments
+            and read such. It is developed to easily make a registration and browse the community.</p>
+        </section>
+        <section id="viewLogin">
+            <h1>Please Login</h1>
+            <form id="formLogin">
+                <div>Username:</div>
+                <div><input type="text" id="loginUser" required/></div>
+                <div>Password:</div>
+                <div><input type="password" id="loginPassword" required/></div>
+                <div><input type="submit" value="Login"/></div>
+            </form>
+        </section>
+
+        <section id="viewRegister">
+            <form id="formRegister">
+                <div><h1>Welcome to the Register page</h1></div>
+                <div>Username:</div>
+                <div><input type="text" id="registerUser" required/></div>
+                <div>Password:</div>
+                <div><input type="password" id="registerPassword" required/></div>
+                <div><input type="submit" value="Register"/></div>
+            </form>
+        </section>
+        <section id="viewMyAdds">
+<b>These are your personal advertisments</b>
+
+            <div id="myAdds"/>
+        </section>
+        <section id="viewAdds">
+            <h1>These are the latest Adds</h1>
+            <div id="adds"/>
+        </section>
+        <section id="viewCreateAdd">
+            <h1>Create a new Add</h1>
+            <form id="formCreateAdd">
+                <div><b>Title:</b></div>
+                <div><input type="text" id="addTitle" required/></div>
+
+                <div><b>Description:</b></div>
+                <div><textarea id="addDescription" rows="20" cols="100" required></textarea></div>
+                <div><input type="submit" value="Publish"/></div>
+            </form>
+        </section>
+    </main>
+</header>
+
+    <footer>
+        <b>Adds Listing Site - All rights reserved</b>
+    </footer>
+</div>
+
+</body>
+</html>
