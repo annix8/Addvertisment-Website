@@ -70,34 +70,8 @@ section h1{
     margin:10px 0px;
     font-size: 1.2em;
 }
-table{
-    margin-left: auto;
-    margin-right:auto;
-    background: transparent;
-   color: black;
-
-}
-table th{
-
-    padding: 10px;
-
-}
-table td{
-    padding: 5px 10px;
 
 
-
-}
-
-
-#infobox, #errorBox, #loadingBox{
-    width: 80%;
-    margin: 10px auto;
-    color: white;
-    text-align: center;
-    padding: 5px;
-    border-radius: 3px;
-}
 
 #loadingBox{
     background: #7CB3E9;
@@ -117,20 +91,6 @@ footer{
     border-radius: 3px;
 }
 
-.singleAdd{
-    border: 1px solid black;
-    margin-top: 2px;
-    background-color: rgba(255,255,255,0.7);
-}
-
-#addDescription{
-    background-color: rgba(255,255,255,0.7);
-    border-radius:10px;
-}
-#addTitle{
-    background-color: rgba(255,255,255,0.7);
-    border-radius:10px;
-}
 #registerUser, #registerPassword, #loginUser, #loginPassword{
     background-color: rgba(255,255,255,0.7);
     border-radius:10px;
