@@ -260,6 +260,31 @@ function listAdds() {
 
 
 function createAdd() {
+const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
+    const kinveyAuthHeaders = {
+      'Authorization': "Kinvey " + sessionStorage.getItem('authToken'),
+    };
+
+    let addData = {
+        title: $('#addTitle').val(),
+        author: currentlyLoggedUser,
+        description: $('#addDescription').val()
+
+    }
+
+    $.ajax({
+        method: "POST",
+        url: kinveyAddsUrl,
+        headers: kinveyAuthHeaders,
+        data: addData,
+        success: createAddSuccess,
+        error: handleAjaxError
+    });
+    
+    function createAddSuccess(response) {
+        listAdds();
+        showInfo('Add created.');
+    }
 
 }
 
