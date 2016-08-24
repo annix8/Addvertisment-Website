@@ -207,6 +207,70 @@ function logout() {
 -------------------------------------------------------------
  */
 
+/*
+Functions for the advertisments such as listing, deleting, editing etc.
+ */
+function listAdds() {
+    $('#adds').empty();
+    showView('viewAdds');
+
+    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
+    if(sessionStorage.getItem('authToken')){
+        var authToken = sessionStorage.getItem('authToken');
+    }
+    else{
+        var authToken = guestCredentials;
+    }
+
+    const kinveyAuthHeaders = {
+        'Authorization': "Kinvey " + authToken,
+    };
+
+    $.ajax({
+        method: "GET",
+        url:kinveyAddsUrl,
+        headers: kinveyAuthHeaders,
+        success: loadAddsSuccess,
+        error: handleAjaxError
+    });
+
+    function loadAddsSuccess(adds) {
+        showInfo('Adds loaded.');
+        if(adds.length == 0)
+            $('#adds').text('No adds in the database.');
+
+
+    else{
+
+        for(let add of adds){
+            let adds = $('<div class="singleAdd">');
+
+            let singleAddHeading = $('<h1>').text(add.title);
+            let singleAddAuthor = $('<p>').text("posted by " + add.author);
+            let singleAddText = $('<p>').text(add.description);
+
+            var singleAdd = [singleAddHeading,singleAddAuthor,singleAddText];
+            adds.append(singleAdd);
+            $('#adds').append(adds);
+
+        }
+        }
+    }
+}
+
+
+function createAdd() {
+
+}
+
+function deleteAdd(event) {
+    
+}
+
+function editAdd() {
+    
+}
+
 
 
 
