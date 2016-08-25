@@ -1,6 +1,13 @@
 body{
-    font-family: fantasy;
+    font-family: "Helvetica Neue";
     font-size: 1.0em;
+
+
+
+
+    background-size: 1350px 1150px;
+    background-position: center;
+
 }
 
 
@@ -55,7 +62,9 @@ ul {
 
 li {
     float: left;
+    /*border: 1px solid darkred;*/
     line-height: 300%;
+
 
 }
 
@@ -69,6 +78,12 @@ li a {
 
 li a:hover {
     background-color: #CED627;
+    color: black;
+    text-decoration: underline;
+}
+
+li a:active{
+    text-decoration: line-through;
 }
 
 
@@ -86,6 +101,27 @@ section h1{
 section>p{
     font-family: "Arial Black";
     font-size: 1.0em;
+}
+
+
+
+table{
+    margin-left: auto;
+    margin-right:auto;
+    background: transparent;
+    color: black;
+
+}
+table th{
+
+    padding: 10px;
+
+}
+table td{
+    padding: 5px 10px;
+
+
+
 }
 
 
@@ -120,8 +156,20 @@ footer{
     border: 1px solid black;
     margin-top: 2px;
     background-color: rgba(255,255,255,0.7);
+    margin-left: -18px;
+    width: 740px;
+    white-space: pre-wrap;      /* CSS3 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap;     /* Opera <7 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    word-wrap: break-word;      /* IE */
 }
-
+.page{
+	display:none;
+}
+#page-1{
+	display:block;
+}
 #addDescription{
     background-color: rgba(255,255,255,0.7);
     border-radius:10px;
