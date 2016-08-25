@@ -289,7 +289,26 @@ const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
 }
 
 function deleteAdd(event) {
-    
+    event.preventDefault();
+    let id = $(this).attr('data-id');
+
+
+    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
+    const kinveyAuthHeaders = {
+        'Authorization': "Kinvey " + sessionStorage.getItem('authToken'),
+    };
+
+    $.ajax({
+        method: "DELETE",
+        url:kinveyAddsUrl + "/" + id,
+        headers: kinveyAuthHeaders,
+        success: deleteAddSuccess,
+        error: handleAjaxError
+    });
+
+    function deleteAddSuccess() {
+        location.reload();
+    }
 }
 
 function editAdd() {
