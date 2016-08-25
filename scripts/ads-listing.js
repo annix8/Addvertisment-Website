@@ -11,7 +11,7 @@ var currentlyLoggedUser = "";
  */
 
 /*
-view functions!
+Next are the view functions!
  */
 function showView(viewName) {
     $('main>section').hide();
@@ -56,7 +56,7 @@ $(function () {
     showHideMenuLinks();
     showView('viewHome');
     currentlyLoggedUser = localStorage.getItem('username');
-    if(currentlyLoggedUser != null){ $('#greetingsHeading').text("Greetings, " + currentlyLoggedUser);}
+    if(currentlyLoggedUser != null){ $('#greetingsHeading').html("Greetings, " + "<span class='helloUsername'>"+ currentlyLoggedUser + "</span>");}
     else{$('#greetingsHeading').text("Greetings");}
 
     $('#linkHome').click(showHomeView);
@@ -92,7 +92,7 @@ $(function () {
 function showHomeView() {
     showView('viewHome');
 
-    if(currentlyLoggedUser != null){ $('#greetingsHeading').text("Greetings, " + currentlyLoggedUser);}
+    if(currentlyLoggedUser != null){ $('#greetingsHeading').html("Greetings, " + "<span class='helloUsername'>"+ currentlyLoggedUser + "</span>");}
     else{$('#greetingsHeading').text("Greetings");}
 
 }
@@ -112,13 +112,78 @@ function showCreateAddView() {
     showView('viewCreateAdd');
 }
 
+/*Here we get the entire collection of advertisments posted by all users and in the loadSuccess function we select those whose
+author is the same with the currentlyLoggedUser
+ */
+function showMyAddsView() {
+    $('#myAdds').empty();
+    showView('viewMyAdds');
+
+    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
+
+    const kinveyAuthHeaders = {
+        'Authorization': "Kinvey " + sessionStorage.getItem('authToken'),
+    };
+
+   $('body').on("click", ".buttonEdit", editAdd);
+   $('body').on("click", ".buttonDelete", deleteAdd);
+
+    $.ajax({
+        method: "GET",
+        url:kinveyAddsUrl,
+        headers: kinveyAuthHeaders,
+        success: loadAddsSuccess,
+        error: handleAjaxError
+    });
+
+
+    function loadAddsSuccess(adds) {
+        showInfo('Your personal adds are loaded.');
+        if(adds.length == 0)
+            $('#myAdds').text('No adds in the database.');
+
+
+
+        else{
+
+          var sd=  adds.filter(function(data){return data.author === currentlyLoggedUser});
+
+            if(sd.length ===0){
+                $('#myAdds').text('No adds published by you.');
+            }
+
+            for(let add of adds){
+                if(add.author === currentlyLoggedUser){
+                    let adds = $('<div class="singleAdd">');
+
+                    let singleAddHeading = $('<h1>').html(add.title);
+                    let singleAddAuthor = $('<p>').html("posted by " + "<span class='helloUsername'>" + add.author + "</span>");
+                    
+                    let singleAddText = $('<p>').html(add.description);
+
+                    let btn_edit = $('<button class="buttonEdit" data-id="'+add._id+'">').text('Edit');
+                    let btn_delete = $('<button class="buttonDelete" data-id="'+add._id+'">').text('Delete');
+
+                    var singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete];
+                    adds.append(singleAdd);
+                    $('#myAdds').append(adds);
+                }
+
+            }
+
+        }
+    }
+
+}
+
+
 
 /*
 -----------------------------------------------------------
  */
 
 /*
-login, logout and register
+Functions suchs as login, logout and register
  */
 function login() {
     const kinveyLoginUrl = kinveyBaseUrl + "user/" + kinveyAppKey + "/login";
@@ -259,8 +324,9 @@ function listAdds() {
 }
 
 
+
 function createAdd() {
-const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
+    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
     const kinveyAuthHeaders = {
       'Authorization': "Kinvey " + sessionStorage.getItem('authToken'),
     };
@@ -285,7 +351,6 @@ const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
         listAdds();
         showInfo('Add created.');
     }
-
 }
 
 function deleteAdd(event) {
@@ -312,7 +377,7 @@ function deleteAdd(event) {
 }
 
 function editAdd() {
-    
+    alert('heya');
 }
 
 
