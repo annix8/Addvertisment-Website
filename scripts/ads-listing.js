@@ -1,4 +1,4 @@
-/*
+﻿/*
 The following lines of code are for the constants such as kinvey credentials!
  */
 const kinveyBaseUrl = "https://baas.kinvey.com/";
@@ -13,6 +13,13 @@ var currentlyLoggedUser = "";
 /*
 Next are the view functions!
  */
+/* window.onbeforeunload = function() {
+    localStorage.clear();
+    localStorage.setItem('username',null);
+    sessionStorage.setItem('authToken', null);
+    currentlyLoggedUser = null;
+};  */
+
 function showView(viewName) {
     $('main>section').hide();
     $('#' + viewName).show();
@@ -55,6 +62,7 @@ $(function () {
 
     showHideMenuLinks();
     showView('viewHome');
+
     currentlyLoggedUser = localStorage.getItem('username');
     if(currentlyLoggedUser != null){ $('#greetingsHeading').html("Greetings, " + "<span class='helloUsername'>"+ currentlyLoggedUser + "</span>");}
     else{$('#greetingsHeading').text("Greetings");}
@@ -81,7 +89,10 @@ $(function () {
         e.preventDefault();
         createAdd();
     });
-
+    $("#formModifyAdd").submit(function (e) {
+        e.preventDefault();
+        modifyAdd();
+    });
     $(document).on({
         ajaxStart: function(){ $("#loadingBox").show()},
         ajaxStop: function() { $("#loadingBox").hide()}
@@ -112,11 +123,16 @@ function showCreateAddView() {
     showView('viewCreateAdd');
 }
 
+function showModifyAddView() {
+    showView('viewModifyAdd');
+}
+
 /*Here we get the entire collection of advertisments posted by all users and in the loadSuccess function we select those whose
 author is the same with the currentlyLoggedUser
  */
 function showMyAddsView() {
     $('#myAdds').empty();
+	$('#page-selection').empty();
     showView('viewMyAdds');
 
     const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
@@ -137,45 +153,62 @@ function showMyAddsView() {
     });
 
 
-    function loadAddsSuccess(adds) {
+    function loadAddsSuccess(allAds) {
         showInfo('Your personal adds are loaded.');
-        if(adds.length == 0)
+        if(allAds.length == 0)
             $('#myAdds').text('No adds in the database.');
-
-
 
         else{
 
-          var sd=  adds.filter(function(data){return data.author === currentlyLoggedUser});
+          var sd = allAds.filter(function(data){return data.author === currentlyLoggedUser});
 
             if(sd.length ===0){
                 $('#myAdds').text('No adds published by you.');
             }
+			else
+			{
+				var ADS_PER_PAGE = 3;
+				var userAdsCount = 0;
+				var pages = [];
+				pages[0] = $('<div class="page" id="page-1">');
+				var pageIndex = 0;
+				for(let add of allAds){
+					if(add.author === currentlyLoggedUser){
+						let adds = $('<div class="singleAdd">');
+						
+						if(userAdsCount % ADS_PER_PAGE == 0 && userAdsCount != 0)
+						{
+							pageIndex++;
+							pages[pageIndex] = $('<div class="page" id="page-' + (pageIndex+1) +'">');
+						}
+						userAdsCount++;
+						
+						let singleAddHeading = $('<h1>').html(add.title);
+						let singleAddAuthor = $('<p>').html("posted by " +
+							"<span class='helloUsername'>" + add.author + "</span>");
 
-            for(let add of adds){
-                if(add.author === currentlyLoggedUser){
-                    let adds = $('<div class="singleAdd">');
+						let singleAddText = $('<p>').html(add.description);
 
-                    let singleAddHeading = $('<h1>').html(add.title);
-                    let singleAddAuthor = $('<p>').html("posted by " + "<span class='helloUsername'>" + add.author + "</span>");
-                    
-                    let singleAddText = $('<p>').html(add.description);
+						let btn_edit = $('<button class="buttonEdit" data-id="'+add._id+'">').text('Edit');
+						let btn_delete = $('<button class="buttonDelete" data-id="'+add._id+'">').text('Delete');
 
-                    let btn_edit = $('<button class="buttonEdit" data-id="'+add._id+'">').text('Edit');
-                    let btn_delete = $('<button class="buttonDelete" data-id="'+add._id+'">').text('Delete');
-
-                    var singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete];
-                    adds.append(singleAdd);
-                    $('#myAdds').append(adds);
-                }
-
-            }
-
+						var singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete];
+						adds.append(singleAdd);
+						pages[pageIndex].append(adds);
+					}
+				}
+				for(var index = 0; index< pages.length; index++){
+					$('#myAdds').append(pages[index]);
+					$('#page-selection').append('<button onClick="showPage(' + (index+1) + ')">' + (index+1) + '</button>');
+				}
+			}
         }
     }
-
 }
-
+function showPage(pageIndex){
+	$('.page').hide();
+	$('#page-'+pageIndex).show();
+}
 
 
 /*
@@ -234,6 +267,45 @@ function register() {
     const kinveyAuthHeaders = {
         'Authorization': "Basic " + btoa(kinveyAppKey + ":" + kinveyAppSecret),
     };
+
+    let userName = $('#registerUser').val();
+    let password = $('#registerPassword').val();
+
+    function validateForm() {
+        if(userName.length <= 3){
+            showErrorMsg("Потребителското име е много късо");
+            return false;
+        }
+
+        if(!userName[0].match(/[a-z]/)){
+            showErrorMsg("Потребителското име не може да започва с цифра");
+            return false;
+        }
+
+        if(!userName.match(/^[a-zA-Z0-9- ]*$/)){
+            showErrorMsg("Въвели сте забранен знак.");
+            return false;
+        }
+
+
+        if(password.length < 3){
+            showErrorMsg("Паролата е с много малко знаци.")
+            return false;
+        }
+
+        return true;
+    }
+
+
+    if(!validateForm()){
+        return;
+    }else {
+        showInfo("Браво :) Успешна регистрация. Честито.");
+    }
+
+
+
+
     let userData = {
         username: $('#registerUser').val(),
         password: $('#registerPassword').val()
@@ -276,7 +348,9 @@ function logout() {
 Functions for the advertisments such as listing, deleting, editing etc.
  */
 function listAdds() {
-    $('#adds').empty();
+    $('#AllAdds').empty();
+    $('#page-selectionAllAdds').empty();
+
     showView('viewAdds');
 
     const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
@@ -302,28 +376,55 @@ function listAdds() {
     function loadAddsSuccess(adds) {
         showInfo('Adds loaded.');
         if(adds.length == 0)
-            $('#adds').text('No adds in the database.');
+            $('#AllAdds').text('No adds in the database.');
 
 
     else{
 
-        for(let add of adds){
-            let adds = $('<div class="singleAdd">');
+            var ADS_PER_PAGE = 3;
+            var userAdsCount = 0;
+            var pages = [];
+            pages[0] = $('<div class="page" id="page-1">');
+            var pageIndex = 0;
+            for(let add of adds){
+                
+                    let adds = $('<div class="singleAdd">');
 
-            let singleAddHeading = $('<h1>').text(add.title);
-            let singleAddAuthor = $('<p>').text("posted by " + add.author);
-            let singleAddText = $('<p>').text(add.description);
+                    if(userAdsCount % ADS_PER_PAGE == 0 && userAdsCount != 0)
+                    {
+                        pageIndex++;
+                        pages[pageIndex] = $('<div class="page" id="page-' + (pageIndex+1) +'">');
+                    }
+                    userAdsCount++;
 
-            var singleAdd = [singleAddHeading,singleAddAuthor,singleAddText];
-            adds.append(singleAdd);
-            $('#adds').append(adds);
+                    let singleAddHeading = $('<h1>').html(add.title);
+                    let singleAddAuthor = $('<p>').html("posted by " +
+                        "<span class='helloUsername'>" + add.author + "</span>");
+
+                    let singleAddText = $('<p>').html(add.description);
+
+
+
+                    var singleAdd = [singleAddHeading,singleAddAuthor,singleAddText];
+                    adds.append(singleAdd);
+                    pages[pageIndex].append(adds);
+                
+            }
+            for(var index = 0; index< pages.length; index++){
+                $('#AllAdds').append(pages[index]);
+                $('#page-selectionAllAdds').append('<button onClick="showPage(' + (index+1) + ')">' + (index+1) + '</button>');
+            }
 
         }
-        }
+        
     }
+     
+    function showPage(pageIndex){
+        $('.page').hide();
+        $('#page-'+pageIndex).show();
+    }
+
 }
-
-
 
 function createAdd() {
     const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
@@ -334,7 +435,8 @@ function createAdd() {
     let addData = {
         title: $('#addTitle').val(),
         author: currentlyLoggedUser,
-        description: $('#addDescription').val()
+        description: $('#addDescription').val(),
+        from_date: $.now()
 
     }
 
@@ -348,6 +450,34 @@ function createAdd() {
     });
     
     function createAddSuccess(response) {
+        listAdds();
+        showInfo('Add created.');
+    }
+}
+
+function modifyAdd() {
+    var id = $('#addModifyId').val();
+    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey+ "/Adds/"+id;
+    const kinveyAuthHeaders = {
+        'Authorization': "Kinvey " + sessionStorage.getItem('authToken'),
+    };
+
+    let addData = {
+        title: $('#addModifyTitle').val(),
+        author: currentlyLoggedUser,
+        description: $('#addModifyDescription').val()
+    }
+
+    $.ajax({
+        method: "PUT",
+        url: kinveyAddsUrl,
+        headers: kinveyAuthHeaders,
+        data: addData,
+        success: modifyAddSuccess,
+        error: handleAjaxError
+    });
+
+    function modifyAddSuccess(response) {
         listAdds();
         showInfo('Add created.');
     }
@@ -372,7 +502,8 @@ function deleteAdd(event) {
     });
 
     function deleteAddSuccess() {
-        location.reload();
+        //location.reload();
+        showMyAddsView();
     }
 }
 
@@ -399,6 +530,8 @@ function editAdd(event) {
         showModifyAddView();
     }
 }
+
+
 
 
 
