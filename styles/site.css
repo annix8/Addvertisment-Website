@@ -89,27 +89,6 @@ section>p{
 }
 
 
-
-table{
-    margin-left: auto;
-    margin-right:auto;
-    background: transparent;
-    color: black;
-
-}
-table th{
-
-    padding: 10px;
-
-}
-table td{
-    padding: 5px 10px;
-
-
-
-}
-
-
 #infobox, #errorBox, #loadingBox{
     width: 80%;
     margin: 10px auto;
