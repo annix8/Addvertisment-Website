@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advertisments</title>
     <script src="scripts/jquery-3.1.0.min.js"></script>
     <script src="scripts/ads-listing.js"></script>
@@ -14,14 +14,14 @@
 <div class="content">
 <header id="menu">
     <ul id="navMenu">
-        <li><a href="#" id="linkHome">Home</a></li>
-        <li><a href="#" id="linkAbout">About</a></li>
-        <li> <a href="#" id="linkLogin">Login</a></li>
-        <li> <a href="#" id="linkRegister">Register</a></li>
-        <li> <a href="#" id="linkMyAdds">My advertisments</a></li>
-        <li> <a href="#" id="linkListAdds">List all advertisments</a></li>
-        <li> <a href="#" id="linkCreateAdd">Create new advertisment</a></li>
-        <li> <a href="#" id="linkLogout">Logout</a>
+        <li> <a href="#" id="linkHome">HOME</a></li>
+        <li> <a href="#" id="linkAbout">ABOUT</a></li>
+        <li> <a href="#" id="linkLogin">LOGIN</a></li>
+        <li> <a href="#" id="linkRegister">REGISTER</a></li>
+        <li> <a href="#" id="linkMyAdds">MY ADVERTISMENTS</a></li>
+        <li> <a href="#" id="linkListAdds">ALL ADVERTISMENTS</a></li>
+        <li> <a href="#" id="linkCreateAdd">NEW ADVERTISMENT</a></li>
+        <li> <a href="#" id="linkLogout">LOGOUT</a>
     </ul>
 
 
@@ -66,31 +66,48 @@
                 <div><input type="submit" value="Register"/></div>
             </form>
         </section>
-        <section id="viewMyAdds">
-<b>These are your personal advertisments</b>
 
-            <div id="myAdds"/>
+
+
+        <section id="viewMyAdds">
+			<strong>These are your personal advertisments</strong>
+            <div id="myAdds"></div>
+			<div id="page-selection"></div>
         </section>
+
         <section id="viewAdds">
             <h1>These are the latest Adds</h1>
-            <div id="adds"/>
+            <div id="AllAdds"></div>
+            <div id="page-selectionAllAdds"></div>
         </section>
         <section id="viewCreateAdd">
             <h1>Create a new Add</h1>
             <form id="formCreateAdd">
-                <div><b>Title:</b></div>
+                <div><strong>Title:</strong></div>
                 <div><input type="text" id="addTitle" required/></div>
 
-                <div><b>Description:</b></div>
+                <div><strong>Description:</strong></div>
                 <div><textarea id="addDescription" rows="20" cols="100" required></textarea></div>
                 <div><input type="submit" value="Publish"/></div>
+            </form>
+        </section>
+        <section id="viewModifyAdd">
+            <h1>Modify Add</h1>
+            <form id="formModifyAdd">
+                <input type="hidden" id="addModifyId" required/>
+                <div><strong>Title:</strong></div>
+                <div><input type="text" id="addModifyTitle" required/></div>
+
+                <div><strong>Description:</strong></div>
+                <div><textarea id="addModifyDescription" rows="20" cols="100" required></textarea></div>
+                <div><input type="submit" value="Modify"/></div>
             </form>
         </section>
     </main>
 </header>
 
     <footer>
-        <b>Adds Listing Site - All rights reserved</b>
+        <strong>Adds Listing Site - All rights reserved</strong>
     </footer>
 </div>
 <video id="my-video" class="video" autoplay muted loop>
