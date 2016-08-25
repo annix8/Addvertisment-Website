@@ -376,11 +376,29 @@ function deleteAdd(event) {
     }
 }
 
-function editAdd() {
-    alert('heya');
+function editAdd(event) {
+    event.preventDefault();
+    let id = $(this).attr('data-id');
+    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds/"+id;
+    const kinveyAuthHeaders = {
+        'Authorization': "Kinvey " + sessionStorage.getItem('authToken'),
+    };
+    var getData = {'_id': id};
+    $.ajax({
+        method: "GET",
+        url: kinveyAddsUrl,
+        headers: kinveyAuthHeaders,
+        data: null,
+        success: getAddSuccess,
+        error: handleAjaxError
+    });
+    function getAddSuccess(data) {
+        $('#addModifyTitle').val(data.title);
+        $('#addModifyDescription').val(data.description);
+        $('#addModifyId').val(data._id);
+        showModifyAddView();
+    }
 }
-
-
 
 
 
