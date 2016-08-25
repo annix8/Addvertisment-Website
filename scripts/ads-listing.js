@@ -1,4 +1,4 @@
-﻿/*
+/*
 The following lines of code are for the constants such as kinvey credentials!
  */
 const kinveyBaseUrl = "https://baas.kinvey.com/";
@@ -19,6 +19,10 @@ Next are the view functions!
     sessionStorage.setItem('authToken', null);
     currentlyLoggedUser = null;
 };  */
+
+
+
+
 
 function showView(viewName) {
     $('main>section').hide();
@@ -54,7 +58,7 @@ function showInfo(message) {
 }
 
 function showErrorMsg(errorMsg) {
-    $('#errorBox').text("Error: " + errorMsg);
+    $('#errorBox').text(errorMsg);
     $('#errorBox').show();
 }
 
@@ -135,7 +139,7 @@ function showMyAddsView() {
 	$('#page-selection').empty();
     showView('viewMyAdds');
 
-    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
+    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds?query={}&sort={\"_kmd.lmt\": -1}";
 
     const kinveyAuthHeaders = {
         'Authorization': "Kinvey " + sessionStorage.getItem('authToken'),
@@ -148,13 +152,14 @@ function showMyAddsView() {
         method: "GET",
         url:kinveyAddsUrl,
         headers: kinveyAuthHeaders,
-        success: loadAddsSuccess,
+        success: loadMyAddsSuccess,
         error: handleAjaxError
     });
 
 
-    function loadAddsSuccess(allAds) {
+    function loadMyAddsSuccess(allAds) {
         showInfo('Your personal adds are loaded.');
+        //allAds.reverse();
         if(allAds.length == 0)
             $('#myAdds').text('No adds in the database.');
 
@@ -162,19 +167,20 @@ function showMyAddsView() {
 
           var sd = allAds.filter(function(data){return data.author === currentlyLoggedUser});
 
+
             if(sd.length ===0){
                 $('#myAdds').text('No adds published by you.');
             }
 			else
 			{
-				var ADS_PER_PAGE = 3;
+				var ADS_PER_PAGE = 5;
 				var userAdsCount = 0;
 				var pages = [];
 				pages[0] = $('<div class="page" id="page-1">');
 				var pageIndex = 0;
 				for(let add of allAds){
 					if(add.author === currentlyLoggedUser){
-						let adds = $('<div class="singleAdd">');
+						let adds = $('<div class="singleAdd panel-body" style="width: 90%; min-width: 200px; margin-left: 7%;" id=' +add._id + '>');
 						
 						if(userAdsCount % ADS_PER_PAGE == 0 && userAdsCount != 0)
 						{
@@ -187,19 +193,69 @@ function showMyAddsView() {
 						let singleAddAuthor = $('<p>').html("posted by " +
 							"<span class='helloUsername'>" + add.author + "</span>");
 
-						let singleAddText = $('<p>').html(add.description);
+                       
+					let fullText = add.description;
+                    let shortTxt = add.description.substring(0, 101);
 
-						let btn_edit = $('<button class="buttonEdit" data-id="'+add._id+'">').text('Edit');
-						let btn_delete = $('<button class="buttonDelete" data-id="'+add._id+'">').text('Delete');
+                    let singleAddText = $('<p class="short">').html(shortTxt + "...");
+                    let singleFullText = $('<p class="full">').html(fullText);
 
-						var singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete];
+
+                    let postId = add._id;
+                    let fuckingDate = add.from_date;
+
+                    // let readMore = $('<button class="readMore btn btn-success" onClick="readMore()"></button>').html('Read More..');
+                    // let hideText = $('<button class="hide btn btn-success" onClick="hide()"></button>').html('Hide...');
+
+                    let readMore = $('<button class="readMore btn btn-success" onClick="readMore(this)"></button>').attr('id', postId).html('Read More..');
+                    let hideText = $('<button class="hide btn btn-success" onClick="hide()"></button>').html('Hide...');
+
+                    let btn_edit = $('<button class="buttonEdit btn btn-primary" data-id="'+add._id+'">').text('Edit');
+                    let btn_delete = $('<button class="buttonDelete btn btn-danger" data-id="'+add._id+'">').text('Delete');
+
+                    var singleAdd = '';
+
+
+                    if(fullText.length <= 50){
+                        singleFullText = $('<p class="short">').html(fullText);
+
+
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleFullText,btn_edit,btn_delete];
+
+
+                    }else{
+                        shortTxt = add.description.substring(0, 51);
+                        singleAddText = $('<p class="short">').html(shortTxt + "...");
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText, btn_edit, btn_delete];
+                    }
+
+
+                     
+                    
+
+
+
+
+
+                        
+
+                        // var singleAdd = '';
+
+                        // if(add.description.length >= 5){
+                        //      singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete, link];
+                        // }else {
+                        //      singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete];
+                        // }
+
+                        //singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete];    
+
 						adds.append(singleAdd);
 						pages[pageIndex].append(adds);
 					}
 				}
 				for(var index = 0; index< pages.length; index++){
 					$('#myAdds').append(pages[index]);
-					$('#page-selection').append('<button onClick="showPage(' + (index+1) + ')">' + (index+1) + '</button>');
+					$('#page-selection').append('<button class="btn btn-success" style="margin-top: 10px;" onClick="showPage(' + (index+1) + ')">' + (index+1) + '</button>');
 				}
 			}
         }
@@ -270,26 +326,32 @@ function register() {
 
     let userName = $('#registerUser').val();
     let password = $('#registerPassword').val();
+    let confirm = $('#confirmPassword').val();
 
     function validateForm() {
         if(userName.length <= 3){
-            showErrorMsg("Потребителското име е много късо");
+            showErrorMsg("Username is too short. Minimum 3 characters");
             return false;
         }
 
         if(!userName[0].match(/[a-z]/)){
-            showErrorMsg("Потребителското име не може да започва с цифра");
+            showErrorMsg("Username can`t begin with digit.");
             return false;
         }
 
         if(!userName.match(/^[a-zA-Z0-9- ]*$/)){
-            showErrorMsg("Въвели сте забранен знак.");
+            showErrorMsg("You have entered forbidden sign. Please check for @, !, ., - , and remove them");
             return false;
         }
 
 
         if(password.length < 3){
-            showErrorMsg("Паролата е с много малко знаци.")
+            showErrorMsg("The password is too short. Minimum 3 characters")
+            return false;
+        }
+
+        if(password != confirm){
+            showErrorMsg("Passwords does not match.");
             return false;
         }
 
@@ -300,7 +362,7 @@ function register() {
     if(!validateForm()){
         return;
     }else {
-        showInfo("Браво :) Успешна регистрация. Честито.");
+        showInfo("Congratulations. Successful registration");
     }
 
 
@@ -347,13 +409,54 @@ function logout() {
 /*
 Functions for the advertisments such as listing, deleting, editing etc.
  */
+
+function redirectMyAdvert(){
+    showView('viewMyAdds');
+}
+
+
+
+
+function readMore(postId){
+    // $('.short').hide();
+    // $('.full').show();
+    // $('.full').addClass('fullVisibilOn');
+    // $('.readMore').hide();
+    // $('.hide').show();
+
+    let fullId = '#' + postId.id;
+
+    $(fullId + ' .short').hide();
+    $(fullId + ' .full').show();
+    $(fullId + ' .full').addClass('fullVisibilOn');
+    $(fullId + ' .readMore').hide();
+    $(fullId + ' .hide').addClass('fullVisibilOn');
+    $(fullId + ' .hide').show();
+
+    //document.write(fullId);
+
+}
+
+function hide(){
+    $('.short').show();
+    $('.full').hide();
+    $('.hide').hide();
+    $('.readMore').show();
+}
+
+
+
+
+
+
+
 function listAdds() {
     $('#AllAdds').empty();
     $('#page-selectionAllAdds').empty();
 
     showView('viewAdds');
 
-    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
+    const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds?query={}&sort={\"_kmd.lmt\": -1}";
     if(sessionStorage.getItem('authToken')){
         var authToken = sessionStorage.getItem('authToken');
     }
@@ -375,20 +478,22 @@ function listAdds() {
 
     function loadAddsSuccess(adds) {
         showInfo('Adds loaded.');
+        //adds.reverse();
         if(adds.length == 0)
             $('#AllAdds').text('No adds in the database.');
 
 
+
     else{
 
-            var ADS_PER_PAGE = 3;
+            var ADS_PER_PAGE = 5;
             var userAdsCount = 0;
             var pages = [];
             pages[0] = $('<div class="page" id="page-1">');
             var pageIndex = 0;
             for(let add of adds){
                 
-                    let adds = $('<div class="singleAdd">');
+                    let adds = $('<div class="singleAdd panel-body" style="width: 90%; min-width: 200px; margin-left: 7%;" id=' +add._id + '>');
 
                     if(userAdsCount % ADS_PER_PAGE == 0 && userAdsCount != 0)
                     {
@@ -401,30 +506,80 @@ function listAdds() {
                     let singleAddAuthor = $('<p>').html("posted by " +
                         "<span class='helloUsername'>" + add.author + "</span>");
 
-                    let singleAddText = $('<p>').html(add.description);
+
+                    //let link = $('<a>').attr("href", "#");
+
+                    let fullText = add.description;
+                    let shortTxt = add.description.substring(0, 101);
+
+                    let singleAddText = $('<p class="short">').html(shortTxt + "...");
+                    let singleFullText = $('<p class="full">').html(fullText);
 
 
+                    let postId = add._id;
 
-                    var singleAdd = [singleAddHeading,singleAddAuthor,singleAddText];
+                // let readMore = $('<button class="readMore" onClick="readMore()"></button>').html('Read More..');
+                // let hideText = $('<button class="hide" onClick="hide()"></button>').html('Hide...');
+
+                    let readMore = $('<button class="readMore btn btn-success" onclick="readMore(this)"></button>').attr('id', postId).html('Read More..');
+                    let hideText = $('<button class="hide btn btn-success" onClick="hide()"></button>').html('Hide...');
+
+                    var singleAdd = '';
+
+
+                    if(fullText.length <= 50){
+                        singleFullText = $('<p class="short">').html(fullText);
+
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleFullText];
+
+
+                    }else{
+                        shortTxt = add.description.substring(0, 51);
+                        singleAddText = $('<p class="short">').html(shortTxt + "...");
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText];
+                    }
+
+
+                     
                     adds.append(singleAdd);
+
+
                     pages[pageIndex].append(adds);
                 
             }
             for(var index = 0; index< pages.length; index++){
                 $('#AllAdds').append(pages[index]);
-                $('#page-selectionAllAdds').append('<button onClick="showPage(' + (index+1) + ')">' + (index+1) + '</button>');
+                $('#page-selectionAllAdds').append('<button class="btn btn-success" style="margin-top: 10px;" onClick="showPage(' + (index+1) + ')">' + (index+1) + '</button>');
             }
 
         }
         
     }
-     
+     // showPage(pageIndex);
     function showPage(pageIndex){
         $('.page').hide();
         $('#page-'+pageIndex).show();
     }
 
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
 
 function createAdd() {
     const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
@@ -432,11 +587,33 @@ function createAdd() {
       'Authorization': "Kinvey " + sessionStorage.getItem('authToken'),
     };
 
+    let authorTitle = $('#addTitle').val();
+
+    function validateForm() {
+        if(authorTitle.length <= 3){
+            showErrorMsg("Title is too short. Minimum 3 characters");
+            return false;
+        }
+
+
+        return true;
+    }
+
+
+    if(!validateForm()){
+        return;
+    }
+
+
+
+
+
+
     let addData = {
         title: $('#addTitle').val(),
         author: currentlyLoggedUser,
         description: $('#addDescription').val(),
-        from_date: $.now()
+        from_date: new Date()
 
     }
 
@@ -450,7 +627,7 @@ function createAdd() {
     });
     
     function createAddSuccess(response) {
-        listAdds();
+        showMyAddsView();
         showInfo('Add created.');
     }
 }
@@ -478,13 +655,19 @@ function modifyAdd() {
     });
 
     function modifyAddSuccess(response) {
-        listAdds();
-        showInfo('Add created.');
+        showMyAddsView();
+        showInfo('Add modified.');
     }
 }
 
 function deleteAdd(event) {
     event.preventDefault();
+
+    let confirmation = confirm("Do you really want to delete this post ?");
+    if(!confirmation){
+        return;
+    }
+
     let id = $(this).attr('data-id');
 
 
@@ -502,7 +685,7 @@ function deleteAdd(event) {
     });
 
     function deleteAddSuccess() {
-        //location.reload();
+        location.reload();
         showMyAddsView();
     }
 }

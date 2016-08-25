@@ -2,34 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Advertisments</title>
     <script src="scripts/jquery-3.1.0.min.js"></script>
     <script src="scripts/ads-listing.js"></script>
 
     <link rel="stylesheet" type="text/css" href="styles/site.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.css" />
+
+    <style type="text/css">
+        .form-control{
+            width: 40%;
+            min-width: 100px;
+            margin-left: 30%;
+        }
+
+        
+
+
+    </style>
 
 </head>
 <body>
-<div class="content">
+<div class="tab-content">
+<div class="container">
 <header id="menu">
-    <ul id="navMenu">
-        <li> <a href="#" id="linkHome">Home</a></li>
-        <li> <a href="#" id="linkAbout">About</a></li>
-        <li> <a href="#" id="linkLogin">Login</a></li>
-        <li> <a href="#" id="linkRegister">Register</a></li>
-        <li> <a href="#" id="linkMyAdds">My advertisments</a></li>
-        <li> <a href="#" id="linkListAdds">List all advertisments</a></li>
-        <li> <a href="#" id="linkCreateAdd">Create new advertisment</a></li>
-        <li> <a href="#" id="linkLogout">Logout</a>
+    <ul class="nav nav-tabs" id="navMenu">
+        <li> <a data-toggle="tab" href="#" id="linkHome">HOME</a></li>
+        <li> <a data-toggle="tab" href="#" id="linkAbout">ABOUT</a></li>
+        <li> <a data-toggle="tab" href="#" id="linkLogin">LOGIN</a></li>
+        <li> <a data-toggle="tab" href="#" id="linkRegister">REGISTER</a></li>
+        <li> <a data-toggle="tab" href="#" id="linkMyAdds">MY ADVERTISMENTS</a></li>
+        <li> <a data-toggle="tab" href="#" id="linkListAdds">ALL ADVERTISMENTS</a></li>
+        <li> <a data-toggle="tab" href="#" id="linkCreateAdd">NEW ADVERTISMENT</a></li>
+        <li> <a data-toggle="tab" href="#" id="linkLogout">LOGOUT</a>
     </ul>
 
 
     <main>
-        <section id="loadingBox">Loading...</section>
-        <section id="infoBox" onclick='$(this).fadeOut()'>Info</section>
-        <section id="errorBox" onclick='$(this).fadeOut()'>Error</section>
-        <section id="viewHome">
+        <section class="alert alert-info" id="loadingBox">Loading...</section>
+        <section class="alert alert-success" id="infoBox" onclick='$(this).fadeOut()'>Info</section>
+        <section class="alert alert-danger" id="errorBox" onclick='$(this).fadeOut()'>Error</section>
+        <section class="tab-pane fade in active" id="viewHome">
+
 
           <h1 id="greetingsHeading">Greetings</h1>
 
@@ -37,83 +52,154 @@
             <p>Here you can post everything that you want to sell/buy. Just login into your account and
             click the Create New Advertisment link. If you are not in our system, you can still browse the collection
             of advertisments our other users have. Enjoy your stay!</p>
+
+            <p>Get started advertising your products. 
+            There are legions of users who might love your themes — but first they need to know about it.
+            Promote your ads on our site. Reach new audiences.
+            It's fast and easy to get started. Select the product you want to advertise and start your campaign!
+            </p>
         </section>
 
-        <section id="viewAbout">
-            <h1>Welcome to the About page</h1>
-            <p>We are four students currently learning in SoftUni. The idea of this
+        
+        <section class="tab-pane fade in active" id="viewAbout">
+            <h1>Who are we ?</h1>
+            <p>We are four students currently learning in <abbr title="For more information click on next link      https://www.softuni.bg">SoftUni.</abbr> The idea of this
             website is to create an environment for users to easily publish their advertisments
             and read such. It is developed to easily make a registration and browse the community.</p>
+
+            
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.7496434892482!2d23.348489451142168!3d42.66666047906509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85cb55c36753%3A0xbde203f1e5db85d1!2sul.+%22Tintyava%22+15-17%2C+1113+Sofia!5e0!3m2!1sen!2sbg!4v1471947880301" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            
+
         </section>
-        <section id="viewLogin">
-            <h1>Please Login</h1>
+        
+
+
+
+
+
+
+
+
+
+        
+
+        <section class="tab-pane fade in active" id="viewLogin">
+
+            <div class="form-group">
+   
+            
             <form id="formLogin">
-                <div>Username:</div>
-                <div><input type="text" id="loginUser" required/></div>
-                <div>Password:</div>
-                <div><input type="password" id="loginPassword" required/></div>
-                <div><input type="submit" value="Login"/></div>
+
+                <div class="col-md-10">
+
+                     <h1>Please Login</h1>
+
+                        Username:
+                        <input class="form-control" type="text" id="loginUser" required/>
+                        Password:
+                        <input class="form-control" type="password" id="loginPassword" required/>
+
+                
+                        <div class="form-group"><input class="btn btn-primary" type="submit" value="Login"/></div>
+
+                </div>
             </form>
+            
+            </div>
         </section>
 
-        <section id="viewRegister">
+
+
+
+
+
+
+
+
+
+
+
+
+        <section class="tab-pane fade in active" id="viewRegister">
+
+            <div class="form-group">
+
             <form id="formRegister">
-                <div><h1>Welcome to the Register page</h1></div>
-                <div>Username:</div>
-                <div><input type="text" id="registerUser" required/></div>
-                <div>Password:</div>
-                <div><input type="password" id="registerPassword" required/></div>
-                <div><input type="submit" value="Register"/></div>
+                
+                 <div class="col-md-10">
+
+                <h1>Welcome to the Register page</h1>
+                    Username:
+                <input class="form-control" type="text" id="registerUser" required/>
+                    Password:
+                <input class="form-control" type="password" id="registerPassword" required/>
+                     Confirm Password:
+                     <input class="form-control" type="password" id="confirmPassword" required/>
+
+
+                <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Register"/>
+                </div>
+
+                </div>
             </form>
+
+            </div>
         </section>
 
 
 
-        <section id="viewMyAdds">
+        <section class="tab-pane fade in active" id="viewMyAdds">
 			<strong>These are your personal advertisments</strong>
             <div id="myAdds"></div>
 			<div id="page-selection"></div>
         </section>
 
-        <section id="viewAdds">
+        <section class="tab-pane fade in active" id="viewAdds">
             <h1>These are the latest Adds</h1>
             <div id="AllAdds"></div>
             <div id="page-selectionAllAdds"></div>
         </section>
-        <section id="viewCreateAdd">
+        <section class="tab-pane fade in active" id="viewCreateAdd">
             <h1>Create a new Add</h1>
             <form id="formCreateAdd">
                 <div><strong>Title:</strong></div>
-                <div><input type="text" id="addTitle" required/></div>
+                <div><input class="form-control" type="text" id="addTitle" required/></div>
 
                 <div><strong>Description:</strong></div>
-                <div><textarea id="addDescription" rows="20" cols="100" required></textarea></div>
-                <div><input type="submit" value="Publish"/></div>
+                <div><textarea class="form-control" style="width: 80%; min-width: 230px; margin-left: 10%;" id="addDescription" rows="20" cols="100" required></textarea></div>
+                <div><input class="btn btn-primary buttonsMargin" type="submit" value="Publish"/></div>
             </form>
         </section>
-        <section id="viewModifyAdd">
+        <section class="tab-pane fade in active" id="viewModifyAdd">
             <h1>Modify Add</h1>
             <form id="formModifyAdd">
                 <input type="hidden" id="addModifyId" required/>
                 <div><strong>Title:</strong></div>
-                <div><input type="text" id="addModifyTitle" required/></div>
+                <div><input class="form-control" type="text" id="addModifyTitle" required/></div>
 
                 <div><strong>Description:</strong></div>
-                <div><textarea id="addModifyDescription" rows="20" cols="100" required></textarea></div>
-                <div><input type="submit" value="Modify"/></div>
+                <div><textarea class="form-control" style="width: 80%; min-width: 230px; margin-left: 10%;" id="addModifyDescription" rows="20" cols="100" required></textarea></div>
+                <div><input class="btn btn-primary buttonsMargin" type="submit" value="Modify"/>
+                     <button class="btn btn-success buttonsMargin" onclick="redirectMyAdvert();">Back</button>
+                </div>
             </form>
         </section>
     </main>
 </header>
 
-    <footer>
+    <footer class="tab-pane fade in active">
         <strong>Adds Listing Site - All rights reserved</strong>
     </footer>
 </div>
+
 <video id="my-video" class="video" autoplay muted loop>
     <source src="media/demo.mp4" type="video/mp4">
     <source src="media/demo.ogv" type="video/ogg">
     <source src="media/demo.webm" type="video/webm">
 </video>
+
+</div>
 </body>
 </html>

@@ -1,13 +1,6 @@
 body{
-    font-family: "Helvetica Neue";
+    font-family: "Times New Roman", "Helvetica Neue";
     font-size: 1.0em;
-
-
-
-
-    background-size: 1350px 1150px;
-    background-position: center;
-
 }
 
 
@@ -17,14 +10,24 @@ body{
 }
 
 
+.full{
+    visibility: hidden;
+}
 
-.content {
+.fullVisibilOn{
+    visibility: visible;
+}
+
+
+
+.container {
     position: relative;
     top: 30%;
     z-index: 2;
     margin: 0 auto;
     max-width: 720px;
     text-align: center;
+    font-weight: normal;
 }
 
 .video{
@@ -58,7 +61,10 @@ ul {
     padding: 0;
     overflow: hidden;
     background-color: #333;
+    font-size: 0.87em;
 }
+
+
 
 li {
     float: left;
@@ -80,6 +86,7 @@ li a:hover {
     background-color: #CED627;
     color: black;
     text-decoration: underline;
+    
 }
 
 li a:active{
@@ -87,11 +94,23 @@ li a:active{
 }
 
 
+li>a:visited{
+    /*color: white;*/
+    text-decoration: line-through;
+    background-color: #CED627;
+}
+
+
 main>section{
     display:none;
     padding: 20px 5px;
+    font-weight: normal;
+    font-size: 1.6em;
 
 }
+
+
+
 
 section h1{
     margin:10px 0px;
@@ -99,33 +118,55 @@ section h1{
 }
 
 section>p{
-    font-family: "Arial Black";
-    font-size: 1.0em;
+    font-size: 0.7em;
 }
+
+
+
+
+table{
+    margin-left: auto;
+    margin-right:auto;
+    background: transparent;
+    color: black;
+
+}
+table th{
+
+    padding: 10px;
+
+}
+table td{
+    padding: 5px 10px;
+
+
+
+}
+
 
 #infobox, #errorBox, #loadingBox{
     width: 80%;
     margin: 10px auto;
-    color: white;
+    /*color: white;*/
     text-align: center;
     padding: 5px;
     border-radius: 3px;
 }
 
-#loadingBox{
+/*#loadingBox{
     background: #7CB3E9;
-}
-#infoBox{
+}*/
+/*#infoBox{
     background: #CED627;
-}
-#errorBox{
+}*/
+/*#errorBox{
     background: red;
-}
+}*/
 
 footer{
     color: #7CB3E9;
     padding: 5px 10px;
-    font-size: 0.8em;
+    font-size: 1.2em;
     text-align: center;
     border-radius: 3px;
 }
@@ -141,6 +182,7 @@ footer{
     white-space: -pre-wrap;     /* Opera <7 */
     white-space: -o-pre-wrap;   /* Opera 7 */
     word-wrap: break-word;      /* IE */
+
 }
 .page{
 	display:none;
@@ -156,7 +198,53 @@ footer{
     background-color: rgba(255,255,255,0.7);
     border-radius:10px;
 }
-#registerUser, #registerPassword, #loginUser, #loginPassword{
+#registerUser, #registerPassword, #loginUser, #loginPassword, #confirmPassword{
     background-color: rgba(255,255,255,0.7);
     border-radius:10px;
+}
+
+
+#viewRegister{
+    /*border: 1px solid green;*/
+    text-align: center;
+    
+}
+
+#formRegister, #formLogin{
+    /*border: 1px solid red;*/
+    height: 400px;
+    text-align: center;
+    width: 100%;
+    margin-left: 7%;
+}
+
+#formRegister{
+    height: 450px;
+}
+
+
+
+.col-xs-4{
+    margin-left: 200px;
+    margin-top: 30px;
+}
+
+.form-group{
+    padding-top: 10px;
+}
+
+
+/*.formBox{
+    border: 1px dashed blue;
+    width: 20%;    
+    height: 20%;
+}*/
+
+.buttonEdit, .buttonDelete, .readMore, .hide{
+    margin: 5px;
+   
+}
+
+.buttonsMargin{
+    margin: 15px;
 }
