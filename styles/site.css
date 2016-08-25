@@ -1,3 +1,15 @@
+body{
+    font-family: fantasy;
+    font-size: 1.0em;
+}
+
+
+.helloUsername{
+    color: #7CB3E9;
+    text-decoration: underline;
+}
+
+
 
 .content {
     position: relative;
@@ -56,7 +68,7 @@ li a {
 }
 
 li a:hover {
-    background-color: #111;
+    background-color: #CED627;
 }
 
 
@@ -68,29 +80,77 @@ main>section{
 
 section h1{
     margin:10px 0px;
-    font-size: 1.2em;
+    font-size: 2.1em;
+}
+
+section>p{
+    font-family: "Arial Black";
+    font-size: 1.0em;
 }
 
 
+
+table{
+    margin-left: auto;
+    margin-right:auto;
+    background: transparent;
+    color: black;
+
+}
+table th{
+
+    padding: 10px;
+
+}
+table td{
+    padding: 5px 10px;
+
+
+
+}
+
+
+#infobox, #errorBox, #loadingBox{
+    width: 80%;
+    margin: 10px auto;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+}
 
 #loadingBox{
     background: #7CB3E9;
 }
 #infoBox{
-    background: #393;
+    background: #CED627;
 }
 #errorBox{
     background: red;
 }
 
 footer{
-
+    color: #7CB3E9;
     padding: 5px 10px;
     font-size: 0.8em;
     text-align: center;
     border-radius: 3px;
 }
 
+.singleAdd{
+    border: 1px solid black;
+    margin-top: 2px;
+    background-color: rgba(255,255,255,0.7);
+}
+
+#addDescription{
+    background-color: rgba(255,255,255,0.7);
+    border-radius:10px;
+}
+#addTitle{
+    background-color: rgba(255,255,255,0.7);
+    border-radius:10px;
+}
 #registerUser, #registerPassword, #loginUser, #loginPassword{
     background-color: rgba(255,255,255,0.7);
     border-radius:10px;
