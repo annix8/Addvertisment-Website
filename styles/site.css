@@ -3,6 +3,11 @@ body{
     font-size: 1.0em;
 }
 
+.topMenuIcons{
+	height: 15px;
+	width: 15px;
+}
+
 
 .helloUsername{
     color: #7CB3E9;
@@ -48,6 +53,8 @@ body{
     padding: 5px;
     line-height: 1.5;
     border-radius: 3px;
+    width: 120%;
+    margin-left: -10%;
 }
 
 #menu a{
