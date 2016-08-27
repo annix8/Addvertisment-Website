@@ -9,6 +9,14 @@ body{
 }
 
 
+#share-buttons img {
+width: 35px;
+padding: 5px;
+border: 0;
+box-shadow: 0;
+display: inline;
+}
+
 .helloUsername{
     color: #7CB3E9;
     text-decoration: underline;
@@ -59,7 +67,7 @@ body{
 
 #menu a{
 
-    display:none;
+    /*display:none;*/
 }
 
 ul {
@@ -102,14 +110,13 @@ li a:active{
 
 
 li>a:visited{
-    /*color: white;*/
     text-decoration: line-through;
     background-color: #CED627;
 }
 
 
 main>section{
-    display:none;
+
     padding: 20px 5px;
     font-weight: normal;
     font-size: 1.6em;
@@ -128,29 +135,6 @@ section>p{
     font-size: 0.7em;
 }
 
-
-
-
-table{
-    margin-left: auto;
-    margin-right:auto;
-    background: transparent;
-    color: black;
-
-}
-table th{
-
-    padding: 10px;
-
-}
-table td{
-    padding: 5px 10px;
-
-
-
-}
-
-
 #infobox, #errorBox, #loadingBox{
     width: 80%;
     margin: 10px auto;
@@ -160,15 +144,6 @@ table td{
     border-radius: 3px;
 }
 
-/*#loadingBox{
-    background: #7CB3E9;
-}*/
-/*#infoBox{
-    background: #CED627;
-}*/
-/*#errorBox{
-    background: red;
-}*/
 
 footer{
     color: #7CB3E9;
@@ -212,13 +187,11 @@ footer{
 
 
 #viewRegister{
-    /*border: 1px solid green;*/
     text-align: center;
     
 }
 
 #formRegister, #formLogin{
-    /*border: 1px solid red;*/
     height: 400px;
     text-align: center;
     width: 100%;
@@ -240,13 +213,6 @@ footer{
     padding-top: 10px;
 }
 
-
-/*.formBox{
-    border: 1px dashed blue;
-    width: 20%;    
-    height: 20%;
-}*/
-
 .buttonEdit, .buttonDelete, .readMore, .hide{
     margin: 5px;
    
@@ -255,3 +221,4 @@ footer{
 .buttonsMargin{
     margin: 15px;
 }
+

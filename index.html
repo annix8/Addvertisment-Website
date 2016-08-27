@@ -20,6 +20,9 @@
 
 </head>
 <body>
+<!-- social icons -->
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
+
 <div class="tab-content">
 <div class="container">
 <header id="menu">
@@ -61,9 +64,11 @@
 
           <h1 id="greetingsHeading">Greetings</h1>
 
+
+
             <h3><i>Welcome to <u>Mauris</u> - the advertising web</i></h3><br>
             <p>Here you can post everything that you want to sell/buy. Just login into your account and
-            click the New Advertisment link. If you are not in our system, you can still browse the collection
+            click the <b>New Advertisment</b> link. If you are not in our system, you can still browse the collection
             of advertisments our other users have. Enjoy your stay!</p><br>
 
             <p>Get started advertising your products. 
@@ -78,15 +83,33 @@
             <h1>Who are we ?</h1><br>
             <p>We are four students currently learning in <abbr title="For more information click on next link      https://www.softuni.bg">SoftUni.</abbr> The idea of this
             website is to create an environment for users to easily publish their advertisments
-            and read such. It is developed to easily make a registration and browse the community.</p><br>
+            and read such. It is developed to easily make a registration and browse the community.
+            </p><br>
 
-            
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.7496434892482!2d23.348489451142168!3d42.66666047906509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85cb55c36753%3A0xbde203f1e5db85d1!2sul.+%22Tintyava%22+15-17%2C+1113+Sofia!5e0!3m2!1sen!2sbg!4v1471947880301" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-            
+
+            <p>
+                <button class="btn btn-success" onclick="showHideContacts()">CONTACT US</button>
+
+            </p>
+
+            <article class="contacts">
+                 <script type="text/javascript"> id = 205819; clr = "e9e9e9---"; </script>
+                 <script type="text/javascript" src="http://kontactr.com/wp.js"></script>
+            </article>
+
+             <p>
+                 <button class="btn btn-success" onclick="showHideMap()">OPEN MAP</button>
+                
+            </p>
+
+            <article class="map">
+                <iframe style="margin-top: 10%; padding-bottom: 10%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.7496434892482!2d23.348489451142168!3d42.66666047906509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85cb55c36753%3A0xbde203f1e5db85d1!2sul.+%22Tintyava%22+15-17%2C+1113+Sofia!5e0!3m2!1sen!2sbg!4v1471947880301" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </article>
 
         </section>
-
         <section class="tab-pane fade in active" id="viewLogin">
+           
+
 
             <div class="form-group">
    
@@ -104,11 +127,18 @@
 
                 
                         <div class="form-group"><input class="btn btn-primary" type="submit" value="Login"/></div>
+                      
+
 
                 </div>
             </form>
             
             </div>
+
+
+
+
+
         </section>
 
         <section class="tab-pane fade in active" id="viewRegister">
@@ -147,6 +177,8 @@
         <section class="tab-pane fade in active" id="viewAdds">
             <h2>These are the latest advertisments</h2><br>
             <div id="AllAdds"></div>
+            
+
             <div id="page-selectionAllAdds"></div>
         </section>
         <section class="tab-pane fade in active" id="viewCreateAdd">
@@ -178,7 +210,86 @@
 </header>
 
     <footer class="tab-pane fade in active">
-        <strong> &copy; Mauris - All rights reserved</strong>
+        <p><b> &copy; Mauris - All rights reserved</b></p><br />
+         <a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+
+
+         <div id="share-buttons">
+    
+    <!-- Buffer -->
+    <a href="https://bufferapp.com/add?url=https://simplesharebuttons.com&amp;text=Simple Share Buttons" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/buffer.png" alt="Buffer" />
+    </a>
+    
+    <!-- Digg -->
+    <a href="http://www.digg.com/submit?url=https://simplesharebuttons.com" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/diggit.png" alt="Digg" />
+    </a>
+    
+    <!-- Email -->
+    <a href="mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 https://simplesharebuttons.com">
+        <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+    </a>
+ 
+    <!-- Facebook -->
+    <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+    </a>
+    
+    <!-- Google+ -->
+    <a href="https://plus.google.com/share?url=https://simplesharebuttons.com" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+    </a>
+    
+    <!-- LinkedIn -->
+    <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://simplesharebuttons.com" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+    </a>
+    
+    <!-- Pinterest -->
+    <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
+        <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" />
+    </a>
+    
+    <!-- Print -->
+    <a href="javascript:;" onclick="window.print()">
+        <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
+    </a>
+    
+    <!-- Reddit -->
+    <a href="http://reddit.com/submit?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
+    </a>
+    
+    <!-- StumbleUpon-->
+    <a href="http://www.stumbleupon.com/submit?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/stumbleupon.png" alt="StumbleUpon" />
+    </a>
+    
+    <!-- Tumblr-->
+    <a href="http://www.tumblr.com/share/link?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" />
+    </a>
+     
+    <!-- Twitter -->
+    <a href="https://twitter.com/share?url=https://simplesharebuttons.com&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+    </a>
+    
+    <!-- VK -->
+    <a href="http://vkontakte.ru/share.php?url=https://simplesharebuttons.com" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/vk.png" alt="VK" />
+    </a>
+    
+    <!-- Yummly -->
+    <a href="http://www.yummly.com/urb/verify?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/yummly.png" alt="Yummly" />
+    </a>
+
+</div>
+
+
+
     </footer>
 </div>
 

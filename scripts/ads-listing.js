@@ -113,6 +113,8 @@ function showHomeView() {
 }
 function showAboutView() {
     showView('viewAbout');
+    $('.contacts').hide();
+    $('.map').hide();
 }
 
 function showLoginView() {
@@ -275,6 +277,7 @@ function showPage(pageIndex){
 Functions suchs as login, logout and register
  */
 function login() {
+    
     const kinveyLoginUrl = kinveyBaseUrl + "user/" + kinveyAppKey + "/login";
     const kinveyAuthHeaders = {
         'Authorization': "Basic " + btoa(kinveyAppKey + ":" + kinveyAppSecret),
@@ -414,6 +417,14 @@ function redirectMyAdvert(){
     showView('viewMyAdds');
 }
 
+
+function showHideContacts(){
+    $('.contacts').toggle();
+}
+
+function showHideMap(){
+    $('.map').toggle();
+}
 
 
 
