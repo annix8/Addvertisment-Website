@@ -17,6 +17,66 @@
             margin-left: 30%;
         }
     </style>
+    <script type="text/javascript">
+
+<!-- Begin
+function GetCookie (name) {
+var arg = name + "=";
+var alen = arg.length;
+var clen = document.cookie.length;
+var i = 0;
+while (i < clen) {
+var j = i + alen;
+if (document.cookie.substring(i, j) == arg)
+return getCookieVal (j);
+i = document.cookie.indexOf(" ", i) + 1;
+if (i == 0) break;
+}
+return null;
+}
+function SetCookie (name, value) {
+var argv = SetCookie.arguments;
+var argc = SetCookie.arguments.length;
+var expires = (argc > 2) ? argv[2] : null;
+var path = (argc > 3) ? argv[3] : null;
+var domain = (argc > 4) ? argv[4] : null;
+var secure = (argc > 5) ? argv[5] : false;
+document.cookie = name + "=" + escape (value) +
+((expires == null) ? "" : ("; expires=" + expires.toGMTString())) +
+((path == null) ? "" : ("; path=" + path)) +
+((domain == null) ? "" : ("; domain=" + domain)) +
+((secure == true) ? "; secure" : "");
+}
+function DeleteCookie (name) {
+var exp = new Date();
+exp.setTime (exp.getTime() - 1);
+var cval = GetCookie (name);
+document.cookie = name + "=" + cval + "; expires=" + exp.toGMTString();
+}
+var expDays = 30;
+var exp = new Date();
+exp.setTime(exp.getTime() + (expDays*24*60*60*1000));
+function amt(){
+var count = GetCookie('count')
+if(count == null) {
+SetCookie('count','1')
+return 1
+}
+else {
+var newcount = parseInt(count) + 1;
+DeleteCookie('count')
+SetCookie('count',newcount,exp)
+return count
+   }
+}
+function getCookieVal(offset) {
+var endstr = document.cookie.indexOf (";", offset);
+if (endstr == -1)
+endstr = document.cookie.length;
+return unescape(document.cookie.substring(offset, endstr));
+}
+// End -->
+</script>
 
 </head>
 <body>
@@ -51,9 +111,10 @@
         	NEW ADVERTISMENT</a></li>
         <li> <a data-toggle="tab" href="#" id="linkLogout">
         	<span><img class="topMenuIcons" src="media/communication.png" alt="logout" /></span>
-        	LOGOUT</a>
+        	LOGOUT</a></li>
     </ul>
 
+</header>
 
     <main>
         <section class="alert alert-info" id="loadingBox">Loading...</section>
@@ -61,14 +122,11 @@
         <section class="alert alert-danger" id="errorBox" onclick='$(this).fadeOut()'>Error</section>
         <section class="tab-pane fade in active" id="viewHome">
 
-
           <h1 id="greetingsHeading">Greetings</h1>
-
-
 
             <h3><i>Welcome to <u>Mauris</u> - the advertising web</i></h3><br>
             <p>Here you can post everything that you want to sell/buy. Just login into your account and
-            click the <b>New Advertisment</b> link. If you are not in our system, you can still browse the collection
+            click the <strong>New Advertisment</strong> link. If you are not in our system, you can still browse the collection
             of advertisments our other users have. Enjoy your stay!</p><br>
 
             <p>Get started advertising your products. 
@@ -76,19 +134,31 @@
             Promote your ads on our site. Reach new audiences.
             It's fast and easy to get started. Select the product you want to advertise and start your campaign!
             </p>
+
+            <a href="#"  onclick="magnifieText('viewHome')">
+                <img class="zoomInZooMOut" src="media/zoom-in.png" alt="zoom text" />
+            </a>
+             <a href="#"  onclick="decreaseText('viewHome')">
+                 <img class="zoomInZooMOut" src="media/zoom-out.png" alt="zoom text" />
+             </a>
         </section>
 
-        
         <section class="tab-pane fade in active" id="viewAbout">
             <h1>Who are we ?</h1><br>
-            <p>We are four students currently learning in <abbr title="For more information click on next link      https://www.softuni.bg">SoftUni.</abbr> The idea of this
+            <p>We are four students currently learning in <abbr title="For more information visit the following link https://www.softuni.bg">SoftUni.</abbr> The idea of this
             website is to create an environment for users to easily publish their advertisments
             and read such. It is developed to easily make a registration and browse the community.
-            </p><br>
+            </p>
 
+           <p> <a href="#"  onclick="magnifieText('viewAbout')">
+                <img class="zoomInZooMOut" src="media/zoom-in.png" alt="zoom text" />
+            </a>
+            <a href="#"  onclick="decreaseText('viewAbout')">
+                <img class="zoomInZooMOut" src="media/zoom-out.png" alt="zoom text" />
+            </a></p><br>
 
             <p>
-                <button class="btn btn-success" onclick="showHideContacts()">CONTACT US</button>
+                <button class="btn btn-success" onclick="showHideContacts()">CONTACTS</button>
 
             </p>
 
@@ -99,45 +169,31 @@
 
              <p>
                  <button class="btn btn-success" onclick="showHideMap()">OPEN MAP</button>
-                
             </p>
+
+
 
             <article class="map">
                 <iframe style="margin-top: 10%; padding-bottom: 10%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.7496434892482!2d23.348489451142168!3d42.66666047906509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85cb55c36753%3A0xbde203f1e5db85d1!2sul.+%22Tintyava%22+15-17%2C+1113+Sofia!5e0!3m2!1sen!2sbg!4v1471947880301" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                 
             </article>
 
         </section>
-        <section class="tab-pane fade in active" id="viewLogin">
-           
 
+        <section class="tab-pane fade in active" id="viewLogin">
 
             <div class="form-group">
-   
-            
             <form id="formLogin">
-
                 <div class="col-md-10">
-
                      <h1>Login</h1><br>
-
                         Username:
                         <input class="form-control" type="text" id="loginUser" required/>
                         Password:
                         <input class="form-control" type="password" id="loginPassword" required/>
-
-                
                         <div class="form-group"><input class="btn btn-primary" type="submit" value="Login"/></div>
-                      
-
-
                 </div>
             </form>
-            
             </div>
-
-
-
-
 
         </section>
 
@@ -146,9 +202,7 @@
             <div class="form-group">
 
             <form id="formRegister">
-                
                  <div class="col-md-10">
-
                 <h1>Register</h1><br>
                     Username:
                 <input class="form-control" type="text" id="registerUser" required/>
@@ -156,21 +210,23 @@
                 <input class="form-control" type="password" id="registerPassword" required/>
                      Confirm Password:
                      <input class="form-control" type="password" id="confirmPassword" required/>
-
-
                 <div class="form-group">
                 <input class="btn btn-primary" type="submit" value="Register"/>
                 </div>
-
                 </div>
             </form>
-
             </div>
         </section>
-
         <section class="tab-pane fade in active" id="viewMyAdds">
 			<h2>These are your personal advertisments</h2><br>
             <div id="myAdds"></div>
+            <a href="#"  onclick="magnifieText('viewMyAdds')">
+                <img class="zoomInZooMOut" src="media/zoom-in.png" alt="zoom text" />
+            </a>
+             <a href="#"  onclick="decreaseText('viewMyAdds')">
+                 <img class="zoomInZooMOut" src="media/zoom-out.png" alt="zoom text" />
+             </a>
+
 			<div id="page-selection"></div>
         </section>
 
@@ -178,6 +234,12 @@
             <h2>These are the latest advertisments</h2><br>
             <div id="AllAdds"></div>
             
+            <a href="#"  onclick="magnifieText('viewAdds')">
+                <img class="zoomInZooMOut" src="media/zoom-in.png" alt="zoom text" />
+            </a>
+             <a href="#"  onclick="decreaseText('viewAdds')">
+                 <img class="zoomInZooMOut" src="media/zoom-out.png" alt="zoom text" />
+             </a>
 
             <div id="page-selectionAllAdds"></div>
         </section>
@@ -186,7 +248,6 @@
             <form id="formCreateAdd">
                 <div><strong>Title:</strong></div>
                 <div><input class="form-control" type="text" id="addTitle" required/></div>
-
                 <div><strong>Description:</strong></div>
                 <div><textarea class="form-control" style="width: 80%; min-width: 230px; margin-left: 10%;" id="addDescription" rows="20" cols="100" required></textarea></div>
                 <div><input class="btn btn-primary buttonsMargin" type="submit" value="Publish"/></div>
@@ -201,18 +262,17 @@
 
                 <div><strong>Description:</strong></div>
                 <div><textarea class="form-control" style="width: 80%; min-width: 230px; margin-left: 10%;" id="addModifyDescription" rows="20" cols="100" required></textarea></div>
-                <div><input class="btn btn-primary buttonsMargin" type="submit" value="Modify"/>
-                     <button class="btn btn-success buttonsMargin" onclick="redirectMyAdvert();">Back</button>
+                <div>
+                    <button  class="btn btn-primary buttonsMargin" onclick="modifyAdd()">Modify</button>
+                     <button class="btn btn-success buttonsMargin" onclick="redirectMyAdvert(event)">Back</button>
                 </div>
             </form>
         </section>
     </main>
-</header>
 
     <footer class="tab-pane fade in active">
-        <p><b> &copy; Mauris - All rights reserved</b></p><br />
+        <strong> &copy; Mauris - All rights reserved</strong><br />
          <a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
-
 
          <div id="share-buttons">
     
@@ -288,8 +348,11 @@
 
 </div>
 
-
-
+    <script type="text/javascript">
+<!-- Begin
+document.write("You've been here <b>" + amt() + "</b> times.")
+// End -->
+    </script>
     </footer>
 </div>
 

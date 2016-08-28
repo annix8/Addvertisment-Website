@@ -11,18 +11,8 @@ var currentlyLoggedUser = "";
  */
 
 /*
-Next are the view functions!
+view functions!
  */
-/* window.onbeforeunload = function() {
-    localStorage.clear();
-    localStorage.setItem('username',null);
-    sessionStorage.setItem('authToken', null);
-    currentlyLoggedUser = null;
-};  */
-
-
-
-
 
 function showView(viewName) {
     $('main>section').hide();
@@ -204,52 +194,32 @@ function showMyAddsView() {
 
 
                     let postId = add._id;
-                    let fuckingDate = add.from_date;
 
-                    // let readMore = $('<button class="readMore btn btn-success" onClick="readMore()"></button>').html('Read More..');
-                    // let hideText = $('<button class="hide btn btn-success" onClick="hide()"></button>').html('Hide...');
+                    let zoomIn = $('<button class="zoomInZoomOutButtons btn btn-success" onclick="magnifieTextPost(this)"><img class="zoomInZooMOut" src="media/zoom-in.png" alt="zoom in text" />Zoom in</button>').attr('id', postId);
+                    let zoomOut = $('<button class="zoomInZoomOutButtons btn btn-success" onclick="decreaseTextPost(this)"><img class="zoomInZooMOut" src="media/zoom-out.png" alt="zoom out text" />Zoom out</button>').attr('id', postId);
+                    let date = add.from_date;
 
                     let readMore = $('<button class="readMore btn btn-success" onClick="readMore(this)"></button>').attr('id', postId).html('Read More..');
-                    let hideText = $('<button class="hide btn btn-success" onClick="hide()"></button>').html('Hide...');
+                    let hideText = $('<button class="hide btn btn-success" onClick="hide(this)"></button>').attr('id', postId).html('Hide...');
 
                     let btn_edit = $('<button class="buttonEdit btn btn-primary" data-id="'+add._id+'">').text('Edit');
                     let btn_delete = $('<button class="buttonDelete btn btn-danger" data-id="'+add._id+'">').text('Delete');
 
                     var singleAdd = '';
 
-
                     if(fullText.length <= 50){
                         singleFullText = $('<p class="short">').html(fullText);
 
+                        let copyButton = $('<button class="copyButton btn btn-success" onclick="copy(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
 
-                        singleAdd = [singleAddHeading,singleAddAuthor,singleFullText,btn_edit,btn_delete];
-
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleFullText,btn_edit,btn_delete, zoomIn, zoomOut, copyButton];
 
                     }else{
                         shortTxt = add.description.substring(0, 51);
                         singleAddText = $('<p class="short">').html(shortTxt + "...");
-                        singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText, btn_edit, btn_delete];
+                        let copyButton = $('<button class="copyButton btn btn-success" onclick="copyLongPosts(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText,btn_edit, btn_delete, zoomIn, zoomOut, copyButton];
                     }
-
-
-                     
-                    
-
-
-
-
-
-                        
-
-                        // var singleAdd = '';
-
-                        // if(add.description.length >= 5){
-                        //      singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete, link];
-                        // }else {
-                        //      singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete];
-                        // }
-
-                        //singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete];    
 
 						adds.append(singleAdd);
 						pages[pageIndex].append(adds);
@@ -369,8 +339,6 @@ function register() {
     }
 
 
-
-
     let userData = {
         username: $('#registerUser').val(),
         password: $('#registerPassword').val()
@@ -413,7 +381,8 @@ function logout() {
 Functions for the advertisments such as listing, deleting, editing etc.
  */
 
-function redirectMyAdvert(){
+function redirectMyAdvert(event){
+    event.preventDefault();
     showView('viewMyAdds');
 }
 
@@ -426,15 +395,39 @@ function showHideMap(){
     $('.map').toggle();
 }
 
+function magnifieText(view){
+    let increase   = 1;
+    let currentView = "#" + view;
+    let currentSize = parseInt($(currentView + ' p').css("font-size"));
 
+    if(currentSize > 30){
+        alert('You have reached maximum size.');
+        currentSize = 30;
+    }
+
+     currentSize = currentSize + increase + "px";
+
+
+    $(currentView + ' p').css({"font-size": currentSize});
+
+}
+
+function decreaseText(view){
+    let decrease   = 1;
+    let currentView = "#" + view;
+    let currentSize = parseInt($(currentView + ' p').css("font-size"));
+
+    if(currentSize < 11){
+        alert('You have reached minimal size.');
+        currentSize = 11;
+    }
+
+     currentSize = currentSize - decrease + "px";
+
+    $(currentView + ' p').css({"font-size": currentSize});
+}
 
 function readMore(postId){
-    // $('.short').hide();
-    // $('.full').show();
-    // $('.full').addClass('fullVisibilOn');
-    // $('.readMore').hide();
-    // $('.hide').show();
-
     let fullId = '#' + postId.id;
 
     $(fullId + ' .short').hide();
@@ -444,22 +437,60 @@ function readMore(postId){
     $(fullId + ' .hide').addClass('fullVisibilOn');
     $(fullId + ' .hide').show();
 
-    //document.write(fullId);
+}
+
+function hide(postId){
+    let fullId = '#' + postId.id;
+
+    $(fullId + ' .short').show();
+    $(fullId + ' .full').hide();
+    $(fullId + ' .hide').hide();
+    $(fullId + ' .readMore').show();
+}
+
+
+function magnifieTextPost(postId){
+    let increase   = 1;
+    let currentView = "#" + postId.id;
+    let currentSize = parseInt($(currentView + ' p').css("font-size"));
+
+    if(currentSize > 30){
+        alert('You have reached maximum size');
+        currentSize = 30;
+    }
+
+     currentSize = currentSize + increase + "px";
+    $(currentView + ' p').css({"font-size": currentSize});
 
 }
 
-function hide(){
-    $('.short').show();
-    $('.full').hide();
-    $('.hide').hide();
-    $('.readMore').show();
+function decreaseTextPost(postId){
+
+    let increase   = 1;
+    let currentView = "#" + postId.id;
+    let currentSize = parseInt($(currentView + ' p').css("font-size"));
+
+    if(currentSize < 12){
+        alert('You have reached minimal size');
+        currentSize = 12;
+    }
+
+     currentSize = currentSize - increase + "px";
+    $(currentView + ' p').css({"font-size": currentSize});
 }
 
+function copy(postId){
+     let target = '#' + postId.id;
+     let text = $(target + " p:nth-child(3)" ).text();
+     window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+}
 
+function copyLongPosts(postId){
+     let target = '#' + postId.id;
+     let text = $(target + " p:nth-child(4)" ).text();
+     window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
 
-
-
-
+}
 
 function listAdds() {
     $('#AllAdds').empty();
@@ -489,11 +520,8 @@ function listAdds() {
 
     function loadAddsSuccess(adds) {
         showInfo('Adds loaded.');
-        //adds.reverse();
         if(adds.length == 0)
             $('#AllAdds').text('No adds in the database.');
-
-
 
     else{
 
@@ -517,9 +545,6 @@ function listAdds() {
                     let singleAddAuthor = $('<p>').html("posted by " +
                         "<span class='helloUsername'>" + add.author + "</span>");
 
-
-                    //let link = $('<a>').attr("href", "#");
-
                     let fullText = add.description;
                     let shortTxt = add.description.substring(0, 101);
 
@@ -528,12 +553,11 @@ function listAdds() {
 
 
                     let postId = add._id;
+                    let zoomIn = $('<button class="zoomInZoomOutButtons btn btn-success" onclick="magnifieTextPost(this)"><img class="zoomInZooMOut" src="media/zoom-in.png" alt="zoom in text" />Zoom in</button>').attr('id', postId);
+                    let zoomOut = $('<button class="zoomInZoomOutButtons btn btn-success" onclick="decreaseTextPost(this)"><img class="zoomInZooMOut" src="media/zoom-out.png" alt="zoom out text" />Zoom out</button>').attr('id', postId);
 
-                // let readMore = $('<button class="readMore" onClick="readMore()"></button>').html('Read More..');
-                // let hideText = $('<button class="hide" onClick="hide()"></button>').html('Hide...');
-
-                    let readMore = $('<button class="readMore btn btn-success" onclick="readMore(this)"></button>').attr('id', postId).html('Read More..');
-                    let hideText = $('<button class="hide btn btn-success" onClick="hide()"></button>').html('Hide...');
+                    let readMore = $('<button class="readMore btn btn-success" onclick="readMore(this)"><img class="zoomInZooMOut" src="media/cursor.png" alt="read more icon" />Read More..</button>').attr('id', postId);
+                    let hideText = $('<button class="hide btn btn-success" onClick="hide(this)"><img class="zoomInZooMOut" src="media/hide.png" alt="hide text" />Hide...</button>').attr('id', postId);
 
                     var singleAdd = '';
 
@@ -541,13 +565,14 @@ function listAdds() {
                     if(fullText.length <= 50){
                         singleFullText = $('<p class="short">').html(fullText);
 
-                        singleAdd = [singleAddHeading,singleAddAuthor,singleFullText];
-
+                        let copyButton = $('<button class="copyButton btn btn-success" onclick="copy(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleFullText, zoomIn, zoomOut, copyButton];
 
                     }else{
                         shortTxt = add.description.substring(0, 51);
                         singleAddText = $('<p class="short">').html(shortTxt + "...");
-                        singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText];
+                        let copyButton = $('<button class="copyButton btn btn-success" onclick="copyLongPosts(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText, zoomIn, zoomOut, copyButton];
                     }
 
 
@@ -566,31 +591,13 @@ function listAdds() {
         }
         
     }
-     // showPage(pageIndex);
+
     function showPage(pageIndex){
         $('.page').hide();
         $('#page-'+pageIndex).show();
     }
 
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
 
 function createAdd() {
     const kinveyAddsUrl = kinveyBaseUrl + "appdata/" + kinveyAppKey + "/Adds";
@@ -606,26 +613,18 @@ function createAdd() {
             return false;
         }
 
-
         return true;
     }
-
 
     if(!validateForm()){
         return;
     }
-
-
-
-
-
 
     let addData = {
         title: $('#addTitle').val(),
         author: currentlyLoggedUser,
         description: $('#addDescription').val(),
         from_date: new Date()
-
     }
 
     $.ajax({

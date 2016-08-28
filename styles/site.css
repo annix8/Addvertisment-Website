@@ -8,6 +8,16 @@ body{
 	width: 15px;
 }
 
+.zoomInZooMOut{
+    height: 15px;
+    width: 15px;
+    
+}
+
+.zoomInZoomOutButtons, .copyButton{
+    margin-top: 5px;
+    margin-right: 6px;
+}
 
 #share-buttons img {
 width: 35px;
@@ -22,7 +32,6 @@ display: inline;
     text-decoration: underline;
 }
 
-
 .full{
     visibility: hidden;
 }
@@ -30,8 +39,6 @@ display: inline;
 .fullVisibilOn{
     visibility: visible;
 }
-
-
 
 .container {
     position: relative;
@@ -44,7 +51,6 @@ display: inline;
 }
 
 .video{
-
     position: fixed;
     top: 50%; left: 50%;
     z-index: 1;
@@ -56,18 +62,12 @@ display: inline;
 }
 
 #menu{
-
     text-align: center;
     padding: 5px;
     line-height: 1.5;
     border-radius: 3px;
     width: 120%;
     margin-left: -10%;
-}
-
-#menu a{
-
-    /*display:none;*/
 }
 
 ul {
@@ -79,14 +79,9 @@ ul {
     font-size: 0.87em;
 }
 
-
-
 li {
     float: left;
-    /*border: 1px solid darkred;*/
     line-height: 300%;
-
-
 }
 
 li a {
@@ -100,31 +95,20 @@ li a {
 li a:hover {
     background-color: #CED627;
     color: black;
-    text-decoration: underline;
-    
 }
 
-li a:active{
-    text-decoration: line-through;
-}
 
 
 li>a:visited{
-    text-decoration: line-through;
     background-color: #CED627;
 }
-
 
 main>section{
 
     padding: 20px 5px;
     font-weight: normal;
     font-size: 1.6em;
-
 }
-
-
-
 
 section h1{
     margin:10px 0px;
@@ -138,12 +122,10 @@ section>p{
 #infobox, #errorBox, #loadingBox{
     width: 80%;
     margin: 10px auto;
-    /*color: white;*/
     text-align: center;
     padding: 5px;
     border-radius: 3px;
 }
-
 
 footer{
     color: #7CB3E9;
@@ -164,7 +146,6 @@ footer{
     white-space: -pre-wrap;     /* Opera <7 */
     white-space: -o-pre-wrap;   /* Opera 7 */
     word-wrap: break-word;      /* IE */
-
 }
 .page{
 	display:none;
@@ -185,10 +166,8 @@ footer{
     border-radius:10px;
 }
 
-
 #viewRegister{
     text-align: center;
-    
 }
 
 #formRegister, #formLogin{
@@ -201,8 +180,6 @@ footer{
 #formRegister{
     height: 450px;
 }
-
-
 
 .col-xs-4{
     margin-left: 200px;
