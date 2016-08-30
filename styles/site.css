@@ -13,11 +13,7 @@ body{
     width: 15px;
     padding-right: 2px;
     margin-top: -2px;
-<<<<<<< HEAD
-
-=======
     
->>>>>>> 9a191af4d3534c4bb71a07fcf35e02ab2cc18e30
 }
 
 .zoomInZoomOutButtons, .copyButton{
@@ -134,7 +130,6 @@ section>p{
 }
 
 footer{
-    margin-top: 10%;
     color: #7CB3E9;
     padding: 5px 10px;
     font-size: 1.2em;
@@ -200,9 +195,10 @@ footer{
 
 .buttonEdit, .buttonDelete, .readMore, .hide{
     margin: 5px;
-
+   
 }
 
 .buttonsMargin{
     margin: 15px;
 }
+
