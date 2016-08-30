@@ -200,12 +200,21 @@ function showMyAddsView() {
                     let date = add.from_date;
 
 
+<<<<<<< HEAD
                     let readMore = $('<button id="tooltip" class="readMore btn btn-success" title="Click here to read full post" onclick="readMore(this)"><img class="zoomInZooMOut" src="media/cursor.png" alt="read more icon" />Read More..</button>').attr('id', postId);
 
                     let hideText = $('<button id="tooltip" class="hide btn btn-success" title="Hide post" onClick="hide(this)"><img class="zoomInZooMOut" src="media/hide.png" alt="hide text" />Hide...</button>').attr('id', postId);
 
                     let btn_edit = $('<button id="tooltip" class="buttonEdit btn btn-primary" title="Here you can edit yours posts" data-id="'+add._id+'"><img class="zoomInZooMOut" src="media/edit.png" alt="edit post" />Edit</button>');
                     let btn_delete = $('<button id="tooltip" class="buttonDelete btn btn-danger" title="This will delete your post. Be carefull!" data-id="'+add._id+'"><img class="zoomInZooMOut" src="media/delete.png" alt="delete post" />Delete</button>');
+=======
+                    let readMore = $('<button class="readMore btn btn-success" onclick="readMore(this)"><img class="zoomInZooMOut" src="media/cursor.png" alt="read more icon" />Read More..</button>').attr('id', postId);
+                   
+                    let hideText = $('<button class="hide btn btn-success" onClick="hide(this)"><img class="zoomInZooMOut" src="media/hide.png" alt="hide text" />Hide...</button>').attr('id', postId);
+
+                    let btn_edit = $('<button class="buttonEdit btn btn-primary" data-id="'+add._id+'"><img class="zoomInZooMOut" src="media/edit.png" alt="edit post" />Edit</button>');
+                    let btn_delete = $('<button class="buttonDelete btn btn-danger" data-id="'+add._id+'"><img class="zoomInZooMOut" src="media/delete.png" alt="delete post" />Delete</button>');
+>>>>>>> 9a191af4d3534c4bb71a07fcf35e02ab2cc18e30
 
                     var singleAdd = '';
 
@@ -213,6 +222,7 @@ function showMyAddsView() {
                     if(fullText.length <= 50){
                         singleFullText = $('<p class="short">').html(fullText);
 
+<<<<<<< HEAD
                         let copyButton = $('<button id="tooltip" class="copyButton btn btn-success" title="Copy this advertisment on clipboard" onclick="copy(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
                         let printButton = $('<button id="tooltip" class="copyButton btn btn-success" title="Print this advertisment" onclick="printDiv(this)"><img class="zoomInZooMOut" src="media/printer.png" alt="hide text" />Print</button>').attr('id', postId);
 
@@ -220,10 +230,17 @@ function showMyAddsView() {
                         singleAdd = [singleAddHeading,singleAddAuthor,singleFullText,btn_edit,btn_delete, zoomIn, zoomOut, copyButton, printButton];
 
 
+=======
+                        let copyButton = $('<button class="copyButton btn btn-success" onclick="copy(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
+                        let printButton = $('<button class="copyButton btn btn-success" onclick="printDiv(this)"><img class="zoomInZooMOut" src="media/printer.png" alt="hide text" />Print</button>').attr('id', postId);
+
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleFullText,btn_edit,btn_delete, zoomIn, zoomOut, copyButton, printButton];
+>>>>>>> 9a191af4d3534c4bb71a07fcf35e02ab2cc18e30
 
                     }else{
                         shortTxt = add.description.substring(0, 51);
                         singleAddText = $('<p class="short">').html(shortTxt + "...");
+<<<<<<< HEAD
                         let copyButton = $('<button  class="copyButton btn btn-success" onclick="copyLongPosts(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
                         let printButton = $('<button class="copyButton btn btn-success" onclick="printLongDiv(this)"><img class="zoomInZooMOut" src="media/printer.png" alt="hide text" />Print</button>').attr('id', postId);
                         singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText,btn_edit, btn_delete, zoomIn, zoomOut, copyButton, printButton];
@@ -251,6 +268,14 @@ function showMyAddsView() {
 
                         //singleAdd = [singleAddHeading,singleAddAuthor,singleAddText,btn_edit,btn_delete];
 
+=======
+                        let copyButton = $('<button class="copyButton btn btn-success" onclick="copyLongPosts(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
+                        let printButton = $('<button class="copyButton btn btn-success" onclick="printLongDiv(this)"><img class="zoomInZooMOut" src="media/printer.png" alt="hide text" />Print</button>').attr('id', postId);
+                        singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText,btn_edit, btn_delete, zoomIn, zoomOut, copyButton, printButton];
+
+                        
+                    }
+>>>>>>> 9a191af4d3534c4bb71a07fcf35e02ab2cc18e30
 						adds.append(singleAdd);
 						pages[pageIndex].append(adds);
 					}
@@ -267,8 +292,6 @@ function showPage(pageIndex){
 	$('.page').hide();
 	$('#page-'+pageIndex).show();
 }
-
-
 /*
 -----------------------------------------------------------
  */
@@ -445,7 +468,11 @@ function magnifieText(view){
 
     $(currentView + ' p').css({"font-size": currentSize});
 
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 9a191af4d3534c4bb71a07fcf35e02ab2cc18e30
 }
 
 
@@ -557,6 +584,7 @@ function printDiv(divName) {
         var restorepage = document.body.innerHTML;
         var printcontent = $(divToPrint + ' p:nth-child(2)').html();
         var printcontent2 = $(divToPrint + ' p:nth-child(3)').html();
+<<<<<<< HEAD
 
         document.body.style.backgroundColor = "#E9E9E9";
         document.body.innerHTML = "<div class='printfriendly'>" + "<h3>" + printcontent + "</h3>" + "<hr />" + "<br />" + "<p>" + printcontent2 + "</p>" +  "</div>";
@@ -565,6 +593,12 @@ function printDiv(divName) {
         window.print();
         document.body.innerHTML = restorepage;
 
+=======
+        document.body.innerHTML = "<div style='margin: 0 auto; width: 100%' class='singleAdd'>" + printcontent + "<br />" + printcontent2 + "</div>";
+        window.print();
+        document.body.innerHTML = restorepage;
+        
+>>>>>>> 9a191af4d3534c4bb71a07fcf35e02ab2cc18e30
         location.reload();
 
 
@@ -587,9 +621,13 @@ function printLongDiv(divName) {
         var restorepage = document.body.innerHTML;
         var printcontent = $(divToPrint + ' p:nth-child(2)').html();
         var printcontent2 = $(divToPrint + ' p:nth-child(4)').html();
+<<<<<<< HEAD
 
         document.body.style.backgroundColor = "#E9E9E9";
         document.body.innerHTML = "<div class='printfriendly'>" + "<h3>" + printcontent + "</h3>" + "<hr />" + "<br />" + "<p>" + printcontent2 + "</p>" + "</div>";
+=======
+        document.body.innerHTML = "<div style='margin: 0 auto; width: 100%' class='singleAdd'>" + printcontent + "<br />" + printcontent2 + "</div>";
+>>>>>>> 9a191af4d3534c4bb71a07fcf35e02ab2cc18e30
         window.print();
         document.body.innerHTML = restorepage;
         location.reload();
@@ -690,8 +728,13 @@ function listAdds() {
 
                         let copyButton = $('<button class="copyButton btn btn-success" onclick="copy(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
                         let printButton = $('<button class="copyButton btn btn-success" onclick="printDiv(this)"><img class="zoomInZooMOut" src="media/printer.png" alt="hide text" />Print</button>').attr('id', postId);
+<<<<<<< HEAD
 
 
+=======
+                        
+                        
+>>>>>>> 9a191af4d3534c4bb71a07fcf35e02ab2cc18e30
 
                         singleAdd = [singleAddHeading,singleAddAuthor,singleFullText, zoomIn, zoomOut, copyButton, printButton];
 
