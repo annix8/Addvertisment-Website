@@ -77,7 +77,6 @@ return unescape(document.cookie.substring(offset, endstr));
 }
 // End -->
 </script>
-
 </head>
 <body>
 <!-- social icons -->
@@ -116,15 +115,20 @@ return unescape(document.cookie.substring(offset, endstr));
 
 </header>
 
+
+
     <main>
         <section class="alert alert-info" id="loadingBox">Loading...</section>
         <section class="alert alert-success" id="infoBox" onclick='$(this).fadeOut()'>Info</section>
         <section class="alert alert-danger" id="errorBox" onclick='$(this).fadeOut()'>Error</section>
         <section class="tab-pane fade in active" id="viewHome">
 
+
           <h1 id="greetingsHeading">Greetings</h1>
 
-            <h3><i>Welcome to <u>Mauris</u> - the advertising web</i></h3><br>
+
+
+            <h3><em>Welcome to <u>Mauris</u> - the advertising web</em></h3><br>
             <p>Here you can post everything that you want to sell/buy. Just login into your account and
             click the <strong>New Advertisment</strong> link. If you are not in our system, you can still browse the collection
             of advertisments our other users have. Enjoy your stay!</p><br>
@@ -143,6 +147,7 @@ return unescape(document.cookie.substring(offset, endstr));
              </a>
         </section>
 
+        
         <section class="tab-pane fade in active" id="viewAbout">
             <h1>Who are we ?</h1><br>
             <p>We are four students currently learning in <abbr title="For more information visit the following link https://www.softuni.bg">SoftUni.</abbr> The idea of this
@@ -158,49 +163,47 @@ return unescape(document.cookie.substring(offset, endstr));
             </a></p><br>
 
             <p>
-                <button class="btn btn-success" onclick="showHideContacts()">CONTACTS</button>
-
+                <button class="btn btn-success" onclick="showHideContacts()"><img class="zoomInZooMOut" src="media/contacts.png" alt="contact form" /> CONTACTS</button>
             </p>
-
             <article class="contacts">
                  <script type="text/javascript"> id = 205819; clr = "e9e9e9---"; </script>
                  <script type="text/javascript" src="http://kontactr.com/wp.js"></script>
             </article>
-
              <p>
-                 <button class="btn btn-success" onclick="showHideMap()">OPEN MAP</button>
+                 <button class="btn btn-success" onclick="showHideMap()"><img class="zoomInZooMOut" src="media/map.png" alt="find us on map" /> OPEN MAP</button>
+                
             </p>
-
-
-
             <article class="map">
                 <iframe style="margin-top: 10%; padding-bottom: 10%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.7496434892482!2d23.348489451142168!3d42.66666047906509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85cb55c36753%3A0xbde203f1e5db85d1!2sul.+%22Tintyava%22+15-17%2C+1113+Sofia!5e0!3m2!1sen!2sbg!4v1471947880301" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                  
             </article>
-
         </section>
 
         <section class="tab-pane fade in active" id="viewLogin">
-
             <div class="form-group">
             <form id="formLogin">
+
                 <div class="col-md-10">
+
                      <h1>Login</h1><br>
+
                         Username:
                         <input class="form-control" type="text" id="loginUser" required/>
                         Password:
                         <input class="form-control" type="password" id="loginPassword" required/>
-                        <div class="form-group"><input class="btn btn-primary" type="submit" value="Login"/></div>
+
+                
+                        <div class="form-group">
+                        <!-- <input class="btn btn-primary" type="submit" value="Login"/> -->
+                        <button class="btn btn-primary" type="submit"><img class="zoomInZooMOut" src="media/login.png" alt="login to site" />LOGIN</button> 
+                        </div>
                 </div>
             </form>
             </div>
-
         </section>
 
         <section class="tab-pane fade in active" id="viewRegister">
-
             <div class="form-group">
-
             <form id="formRegister">
                  <div class="col-md-10">
                 <h1>Register</h1><br>
@@ -210,16 +213,19 @@ return unescape(document.cookie.substring(offset, endstr));
                 <input class="form-control" type="password" id="registerPassword" required/>
                      Confirm Password:
                      <input class="form-control" type="password" id="confirmPassword" required/>
+
                 <div class="form-group">
-                <input class="btn btn-primary" type="submit" value="Register"/>
+                      <button class="btn btn-primary" type="submit"><img class="zoomInZooMOut" src="media/register.png" alt="register" />REGISTER</button> 
                 </div>
                 </div>
             </form>
             </div>
         </section>
+
         <section class="tab-pane fade in active" id="viewMyAdds">
 			<h2>These are your personal advertisments</h2><br>
             <div id="myAdds"></div>
+
             <a href="#"  onclick="magnifieText('viewMyAdds')">
                 <img class="zoomInZooMOut" src="media/zoom-in.png" alt="zoom text" />
             </a>
@@ -248,9 +254,12 @@ return unescape(document.cookie.substring(offset, endstr));
             <form id="formCreateAdd">
                 <div><strong>Title:</strong></div>
                 <div><input class="form-control" type="text" id="addTitle" required/></div>
+
                 <div><strong>Description:</strong></div>
                 <div><textarea class="form-control" style="width: 80%; min-width: 230px; margin-left: 10%;" id="addDescription" rows="20" cols="100" required></textarea></div>
-                <div><input class="btn btn-primary buttonsMargin" type="submit" value="Publish"/></div>
+               
+                <div><button class="btn btn-primary buttonsMargin" type="submit"><img class="zoomInZooMOut" src="media/add.png" alt="add new post" />Publish</button>
+                <button class="btn btn-success buttonsMargin" type="reset"><img class="zoomInZooMOut" src="media/eraser.png" alt="add new post" />Clear</button></div>
             </form>
         </section>
         <section class="tab-pane fade in active" id="viewModifyAdd">
@@ -263,16 +272,18 @@ return unescape(document.cookie.substring(offset, endstr));
                 <div><strong>Description:</strong></div>
                 <div><textarea class="form-control" style="width: 80%; min-width: 230px; margin-left: 10%;" id="addModifyDescription" rows="20" cols="100" required></textarea></div>
                 <div>
-                    <button  class="btn btn-primary buttonsMargin" onclick="modifyAdd()">Modify</button>
-                     <button class="btn btn-success buttonsMargin" onclick="redirectMyAdvert(event)">Back</button>
+                    <button  class="btn btn-primary buttonsMargin" onclick="modifyAdd()"><img class="zoomInZooMOut" src="media/edit.png" alt="modify post" />Modify</button>
+                     <button class="btn btn-success buttonsMargin" onclick="redirectMyAdvert(event)"><img class="zoomInZooMOut" src="media/back.png" alt="back button" />Back</button>
                 </div>
             </form>
         </section>
     </main>
 
+
     <footer class="tab-pane fade in active">
         <strong> &copy; Mauris - All rights reserved</strong><br />
          <a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+
 
          <div id="share-buttons">
     
@@ -347,7 +358,6 @@ return unescape(document.cookie.substring(offset, endstr));
     </a>
 
 </div>
-
     <script type="text/javascript">
 <!-- Begin
 document.write("You've been here <b>" + amt() + "</b> times.")
@@ -355,7 +365,6 @@ document.write("You've been here <b>" + amt() + "</b> times.")
     </script>
     </footer>
 </div>
-
 <video id="my-video" class="video" autoplay muted loop>
     <source src="media/demo.mp4" type="video/mp4">
     <source src="media/demo.ogv" type="video/ogg">
