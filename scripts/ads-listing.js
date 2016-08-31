@@ -172,19 +172,19 @@ function showMyAddsView() {
 				for(let add of allAds){
 					if(add.author === currentlyLoggedUser){
 						let adds = $('<div class="singleAdd panel-body" style="width: 90%; min-width: 200px; margin-left: 7%;" id=' +add._id + '>');
-						
+
 						if(userAdsCount % ADS_PER_PAGE == 0 && userAdsCount != 0)
 						{
 							pageIndex++;
 							pages[pageIndex] = $('<div class="page" id="page-' + (pageIndex+1) +'">');
 						}
 						userAdsCount++;
-						
+
 						let singleAddHeading = $('<h1>').html(add.title);
 						let singleAddAuthor = $('<p>').html("posted by " +
 							"<span class='helloUsername'>" + add.author + "</span>");
 
-                       
+
 					let fullText = add.description;
                     let shortTxt = add.description.substring(0, 101);
 
@@ -200,7 +200,7 @@ function showMyAddsView() {
 
 
                     let readMore = $('<button class="readMore btn btn-success" onclick="readMore(this)"><img class="zoomInZooMOut" src="media/cursor.png" alt="read more icon" />Read More..</button>').attr('id', postId);
-                   
+
                     let hideText = $('<button class="hide btn btn-success" onClick="hide(this)"><img class="zoomInZooMOut" src="media/hide.png" alt="hide text" />Hide...</button>').attr('id', postId);
 
                     let btn_edit = $('<button class="buttonEdit btn btn-primary" data-id="'+add._id+'"><img class="zoomInZooMOut" src="media/edit.png" alt="edit post" />Edit</button>');
@@ -224,7 +224,7 @@ function showMyAddsView() {
                         let printButton = $('<button class="copyButton btn btn-success" onclick="printLongDiv(this)"><img class="zoomInZooMOut" src="media/printer.png" alt="hide text" />Print</button>').attr('id', postId);
                         singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText,btn_edit, btn_delete, zoomIn, zoomOut, copyButton, printButton];
 
-                        
+
                     }
 						adds.append(singleAdd);
 						pages[pageIndex].append(adds);
@@ -250,7 +250,7 @@ function showPage(pageIndex){
 Functions suchs as login, logout and register
  */
 function login() {
-    
+
     const kinveyLoginUrl = kinveyBaseUrl + "user/" + kinveyAppKey + "/login";
     const kinveyAuthHeaders = {
         'Authorization': "Basic " + btoa(kinveyAppKey + ":" + kinveyAppSecret),
@@ -341,9 +341,6 @@ function register() {
         showInfo("Congratulations. Successful registration");
     }
 
-
-
-
     let userData = {
         username: $('#registerUser').val(),
         password: $('#registerPassword').val()
@@ -401,8 +398,6 @@ function showHideMap(){
 }
 
 
-
-
 function magnifieText(view){
     let increase   = 1;
     let currentView = "#" + view;
@@ -418,7 +413,7 @@ function magnifieText(view){
 
     $(currentView + ' p').css({"font-size": currentSize});
 
-    
+
 }
 
 
@@ -464,13 +459,16 @@ function magnifieTextPost(postId){
     let currentView = "#" + postId.id;
     let currentSize = parseInt($(currentView + ' p').css("font-size"));
 
+
     if(currentSize > 30){
         alert('You have reached maximum size');
         currentSize = 30;
     }
 
      currentSize = currentSize + increase + "px";
+     
     $(currentView + ' p').css({"font-size": currentSize});
+
 
 }
 
@@ -512,10 +510,13 @@ function printDiv(divName) {
         var restorepage = document.body.innerHTML;
         var printcontent = $(divToPrint + ' p:nth-child(2)').html();
         var printcontent2 = $(divToPrint + ' p:nth-child(3)').html();
-        document.body.innerHTML = "<div style='margin: 0 auto; width: 100%' class='singleAdd'>" + printcontent + "<br />" + printcontent2 + "</div>";
+
+        document.body.style.backgroundColor = "#E9E9E9";
+        document.body.innerHTML = "<div class='printfriendly'>" + "<h3>" + printcontent + "</h3>" + "<hr />" + "<br />" + "<p>" + printcontent2 + "</p>" +  "</div>";
+
         window.print();
         document.body.innerHTML = restorepage;
-        
+
         location.reload();
 
 }
@@ -523,14 +524,19 @@ function printDiv(divName) {
 function printLongDiv(divName) {
 
         let divToPrint = '#' + divName.id;
+
         var restorepage = document.body.innerHTML;
         var printcontent = $(divToPrint + ' p:nth-child(2)').html();
         var printcontent2 = $(divToPrint + ' p:nth-child(4)').html();
-        document.body.innerHTML = "<div style='margin: 0 auto; width: 100%' class='singleAdd'>" + printcontent + "<br />" + printcontent2 + "</div>";
+
+        document.body.style.backgroundColor = "#E9E9E9";
+        document.body.innerHTML = "<div class='printfriendly'>" + "<h3>" + printcontent + "</h3>" + "<hr />" + "<br />" + "<p>" + printcontent2 + "</p>" + "</div>";
+
         window.print();
         document.body.innerHTML = restorepage;
         location.reload();
 }
+
 
 function listAdds() {
     $('#AllAdds').empty();
@@ -571,7 +577,7 @@ function listAdds() {
             pages[0] = $('<div class="page" id="page-1">');
             var pageIndex = 0;
             for(let add of adds){
-                
+
                     let adds = $('<div class="singleAdd panel-body" style="width: 90%; min-width: 200px; margin-left: 7%;" id=' +add._id + '>');
 
                     if(userAdsCount % ADS_PER_PAGE == 0 && userAdsCount != 0)
@@ -607,8 +613,8 @@ function listAdds() {
 
                         let copyButton = $('<button class="copyButton btn btn-success" onclick="copy(this)"><img class="zoomInZooMOut" src="media/copy.png" alt="hide text" />Copy</button>').attr('id', postId);
                         let printButton = $('<button class="copyButton btn btn-success" onclick="printDiv(this)"><img class="zoomInZooMOut" src="media/printer.png" alt="hide text" />Print</button>').attr('id', postId);
-                        
-                        
+
+
 
                         singleAdd = [singleAddHeading,singleAddAuthor,singleFullText, zoomIn, zoomOut, copyButton, printButton];
 
@@ -622,13 +628,9 @@ function listAdds() {
                         singleAdd = [singleAddHeading,singleAddAuthor,singleAddText, singleFullText, readMore, hideText, zoomIn, zoomOut, copyButton, printButton];
                     }
 
-
-                     
                     adds.append(singleAdd);
-
-
                     pages[pageIndex].append(adds);
-                
+
             }
             for(var index = 0; index< pages.length; index++){
                 $('#AllAdds').append(pages[index]);
@@ -636,7 +638,7 @@ function listAdds() {
             }
 
         }
-        
+
     }
 
     function showPage(pageIndex){
@@ -682,7 +684,7 @@ function createAdd() {
         success: createAddSuccess,
         error: handleAjaxError
     });
-    
+
     function createAddSuccess(response) {
         showMyAddsView();
         showInfo('Add created.');
@@ -770,8 +772,3 @@ function editAdd(event) {
         showModifyAddView();
     }
 }
-
-
-
-
-

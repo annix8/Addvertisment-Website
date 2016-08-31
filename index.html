@@ -6,8 +6,13 @@
     <title>Mauris</title>
     <script src="scripts/jquery-3.1.0.min.js"></script>
     <script src="scripts/ads-listing.js"></script>
+    <script src="scripts/tooltipster-master/dist/js/tooltipster.bundle.js"></script>
+    <script src="scripts/visitorsCounter.js"></script>
+
     <link rel="stylesheet" type="text/css" href="styles/site.css"/>
     <link rel="stylesheet" type="text/css" href="styles/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="scripts/tooltipster-master/dist/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="styles/printFriendly.css" />
     <style type="text/css">
         .form-control{
             width: 40%;
@@ -15,66 +20,14 @@
             margin-left: 30%;
         }
     </style>
-    <script type="text/javascript">
 
-<!-- Begin
-function GetCookie (name) {
-var arg = name + "=";
-var alen = arg.length;
-var clen = document.cookie.length;
-var i = 0;
-while (i < clen) {
-var j = i + alen;
-if (document.cookie.substring(i, j) == arg)
-return getCookieVal (j);
-i = document.cookie.indexOf(" ", i) + 1;
-if (i == 0) break;
-}
-return null;
-}
-function SetCookie (name, value) {
-var argv = SetCookie.arguments;
-var argc = SetCookie.arguments.length;
-var expires = (argc > 2) ? argv[2] : null;
-var path = (argc > 3) ? argv[3] : null;
-var domain = (argc > 4) ? argv[4] : null;
-var secure = (argc > 5) ? argv[5] : false;
-document.cookie = name + "=" + escape (value) +
-((expires == null) ? "" : ("; expires=" + expires.toGMTString())) +
-((path == null) ? "" : ("; path=" + path)) +
-((domain == null) ? "" : ("; domain=" + domain)) +
-((secure == true) ? "; secure" : "");
-}
-function DeleteCookie (name) {
-var exp = new Date();
-exp.setTime (exp.getTime() - 1);
-var cval = GetCookie (name);
-document.cookie = name + "=" + cval + "; expires=" + exp.toGMTString();
-}
-var expDays = 30;
-var exp = new Date();
-exp.setTime(exp.getTime() + (expDays*24*60*60*1000));
-function amt(){
-var count = GetCookie('count')
-if(count == null) {
-SetCookie('count','1')
-return 1
-}
-else {
-var newcount = parseInt(count) + 1;
-DeleteCookie('count')
-SetCookie('count',newcount,exp)
-return count
-   }
-}
-function getCookieVal(offset) {
-var endstr = document.cookie.indexOf (";", offset);
-if (endstr == -1)
-endstr = document.cookie.length;
-return unescape(document.cookie.substring(offset, endstr));
-}
-// End -->
+
+<script>
+        $(document).ready(function() {
+            $('.tooltip').tooltipster();
+        });
 </script>
+
 </head>
 <body>
 <!-- social icons -->
@@ -122,14 +75,12 @@ return unescape(document.cookie.substring(offset, endstr));
 
           <h1 id="greetingsHeading">Greetings</h1>
 
-
-
             <h3><em>Welcome to <u>Mauris</u> - the advertising web</em></h3><br>
             <p>Here you can post everything that you want to sell/buy. Just login into your account and
             click the <strong>New Advertisment</strong> link. If you are not in our system, you can still browse the collection
             of advertisments our other users have. Enjoy your stay!</p><br>
 
-            <p>Get started advertising your products. 
+            <p>Get started advertising your products.
             There are legions of users who might love your themes — but first they need to know about it.
             Promote your ads on our site. Reach new audiences.
             It's fast and easy to get started. Select the product you want to advertise and start your campaign!
@@ -143,10 +94,11 @@ return unescape(document.cookie.substring(offset, endstr));
              </a>
         </section>
 
-        
+
         <section class="tab-pane fade in active" id="viewAbout">
+        
             <h1>Who are we ?</h1><br>
-            <p>We are four students currently learning in <abbr title="For more info visit www.softuni.bg">SoftUni</abbr>. The idea of this
+            <p>We are four students currently learning in <abbr title="For more info visit www.softuni.bg">SoftUni</abbr>.The idea of this
             website is to create an environment for users to easily publish their advertisments
             and read such. It is developed to easily make a registration and browse the community.
             </p>
@@ -167,11 +119,11 @@ return unescape(document.cookie.substring(offset, endstr));
             </article>
              <p>
                  <button class="btn btn-success" onclick="showHideMap()"><img class="zoomInZooMOut" src="media/map.png" alt="find us on map" /> OPEN MAP</button>
-                
+
             </p>
             <article class="map">
                 <iframe style="margin-top: 10%; padding-bottom: 10%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.7496434892482!2d23.348489451142168!3d42.66666047906509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa85cb55c36753%3A0xbde203f1e5db85d1!2sul.+%22Tintyava%22+15-17%2C+1113+Sofia!5e0!3m2!1sen!2sbg!4v1471947880301" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-                 
+
             </article>
         </section>
 
@@ -188,7 +140,7 @@ return unescape(document.cookie.substring(offset, endstr));
                         Password:
                         <input class="form-control" type="password" id="loginPassword" required/>
                         <div class="form-group">
-                        <button class="btn btn-primary" type="submit"><img class="zoomInZooMOut" src="media/login.png" alt="login to site" />LOGIN</button> 
+                        <button class="btn btn-primary" type="submit"><img class="zoomInZooMOut" src="media/login.png" alt="login to site" />LOGIN</button>
                         </div>
                 </div>
             </form>
@@ -208,7 +160,7 @@ return unescape(document.cookie.substring(offset, endstr));
                      <input class="form-control" type="password" id="confirmPassword" required/>
 
                 <div class="form-group">
-                      <button class="btn btn-primary" type="submit"><img class="zoomInZooMOut" src="media/register.png" alt="register" />REGISTER</button> 
+                      <button class="btn btn-primary" type="submit"><img class="zoomInZooMOut" src="media/register.png" alt="register" />REGISTER</button>
                 </div>
                 </div>
             </form>
@@ -232,7 +184,7 @@ return unescape(document.cookie.substring(offset, endstr));
         <section class="tab-pane fade in active" id="viewAdds">
             <h2>These are the latest advertisments</h2><br>
             <div id="AllAdds"></div>
-            
+
             <a href="#"  onclick="magnifieText('viewAdds')">
                 <img class="zoomInZooMOut" src="media/zoom-in.png" alt="zoom text" />
             </a>
@@ -250,7 +202,7 @@ return unescape(document.cookie.substring(offset, endstr));
 
                 <div><strong>Description:</strong></div>
                 <div><textarea class="form-control" style="width: 80%; min-width: 230px; margin-left: 10%;" id="addDescription" rows="20" cols="100" required></textarea></div>
-               
+
                 <div><button class="btn btn-primary buttonsMargin" type="submit"><img class="zoomInZooMOut" src="media/add.png" alt="add new post" />Publish</button>
                 <button class="btn btn-success buttonsMargin" type="reset"><img class="zoomInZooMOut" src="media/eraser.png" alt="add new post" />Clear</button></div>
             </form>
@@ -279,72 +231,72 @@ return unescape(document.cookie.substring(offset, endstr));
 
 
          <div id="share-buttons">
-    
+
     <!-- Buffer -->
     <a href="https://bufferapp.com/add?url=https://simplesharebuttons.com&amp;text=Simple Share Buttons" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/buffer.png" alt="Buffer" />
     </a>
-    
+
     <!-- Digg -->
     <a href="http://www.digg.com/submit?url=https://simplesharebuttons.com" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/diggit.png" alt="Digg" />
     </a>
-    
+
     <!-- Email -->
     <a href="mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 https://simplesharebuttons.com">
         <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
     </a>
- 
+
     <!-- Facebook -->
     <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
     </a>
-    
+
     <!-- Google+ -->
     <a href="https://plus.google.com/share?url=https://simplesharebuttons.com" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
     </a>
-    
+
     <!-- LinkedIn -->
     <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://simplesharebuttons.com" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
     </a>
-    
+
     <!-- Pinterest -->
     <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
         <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" />
     </a>
-    
+
     <!-- Print -->
     <a href="javascript:;" onclick="window.print()">
         <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
     </a>
-    
+
     <!-- Reddit -->
     <a href="http://reddit.com/submit?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
     </a>
-    
+
     <!-- StumbleUpon-->
     <a href="http://www.stumbleupon.com/submit?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/stumbleupon.png" alt="StumbleUpon" />
     </a>
-    
+
     <!-- Tumblr-->
     <a href="http://www.tumblr.com/share/link?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" />
     </a>
-     
+
     <!-- Twitter -->
     <a href="https://twitter.com/share?url=https://simplesharebuttons.com&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
     </a>
-    
+
     <!-- VK -->
     <a href="http://vkontakte.ru/share.php?url=https://simplesharebuttons.com" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/vk.png" alt="VK" />
     </a>
-    
+
     <!-- Yummly -->
     <a href="http://www.yummly.com/urb/verify?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
         <img src="https://simplesharebuttons.com/images/somacro/yummly.png" alt="Yummly" />
